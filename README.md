@@ -1,12 +1,11 @@
 <div id="img">
 <img src="S!PPO.png" alt="">
 </div>
-
-
-<div style="text-align: center;">
+  
+  
   私たちは、人々がより充実した生活を過ごすための技術を開発するチームです。  
-</div>
-
+  
+  
 [NEWS](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
 [ABOUT US](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
 [PRODUCTS](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
