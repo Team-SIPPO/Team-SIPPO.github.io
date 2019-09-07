@@ -1,3 +1,5 @@
+<img src="S!PPO.png" width="200" alt="">
+
 私たちは、人々がより充実した生活を過ごすための技術を開発するチームです。  
 
 [NEWS](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
