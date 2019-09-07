@@ -1,4 +1,4 @@
-# S!PPO's Web Page
+# 
 ---
 
 ### S!PPOについて
