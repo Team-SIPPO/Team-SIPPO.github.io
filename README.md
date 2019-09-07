@@ -1,4 +1,6 @@
-<img src="S!PPO.png" width="200" alt="">
+<div id="img">
+<img src="S!PPO.png" alt="">
+</div>
 
 私たちは、人々がより充実した生活を過ごすための技術を開発するチームです。  
 
