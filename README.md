@@ -9,6 +9,7 @@
 [NEWS](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
 [ABOUT US](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
 [PRODUCTS](https://github.com/Team-SIPPO/Team-SIPPO.github.io)  
+[REPOSITORY](https://github.com/Team-SIPPO)  
 [MOVIE](https://www.youtube.com/channel/UCV285Ke2ubPht54D4sOOsqw)  
 [BLOG](https://knalaboratory.hatenablog.com/)  
 
