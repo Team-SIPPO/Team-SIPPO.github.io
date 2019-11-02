@@ -30,12 +30,13 @@ cYclipは自転車乗り向けアプリです。
 comming soon...  
 
 ## ■MEMBER■□■□■□■□■□  
+<p>
 <img src="TAN2.png" align="left">
 [TAN2](https://twitter.com/TatsuyaMori3)  
 【Technology Designer】  
 　ビジョン策定  
 　コア技術開発  
-  
+</p>  
 <img src="B.B..png" align="left">
 B.B(Ph.D.)  　　
 【Service Design Architect】  
