@@ -30,6 +30,7 @@ cYclipはどんどん自転車にのりたくなるアプリです。
   
   
   
+★Cheeeez  
 <div id="img">
   <img src="Cheeeez1-1.png" alt="">
 </div>
@@ -39,6 +40,7 @@ Cheeeez（仮）は大切な瞬間を逃さない自動映えシーン認識/記
 空中から良い角度でシーンを記録します。  
   
   
+★Flyable service  
 <div id="img">
   <img src="プレゼンテーション2.jpg" alt="">
 </div>
