@@ -13,7 +13,7 @@
 [■REPOSITORY■](https://github.com/Team-SIPPO?tab=repositories)  
 [■MOVIE■](https://www.youtube.com/channel/UCV285Ke2ubPht54D4sOOsqw)  
 [■BLOG■](https://knalaboratory.hatenablog.com/)  
-
+[■CONTACT US■](team.sippo@gmail.com)  
 ## ■PRODUCTS■□■□■□■□■□
 <div id="img">
   <a href="https://play.google.com/store/apps/details?id=com.laboratory.kna.cyclip&hl=ja">
