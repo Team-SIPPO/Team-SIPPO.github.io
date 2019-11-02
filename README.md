@@ -75,7 +75,7 @@ K(Ph.D.)
 ♪ソフトウェア品質管理  
 ♪知的財産管理  
   
-![T](T.png)
+![T](T.png)  
 T  
 【Dream Conductor Unaffiliated Director】  
 ♪営業  
