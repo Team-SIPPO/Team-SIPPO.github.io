@@ -21,14 +21,28 @@
   </a>
 </div>
   
-  
-cYclipは自転車乗り向けアプリです。  
+cYclipはどんどん自転車にのりたくなるアプリです。  
 ダッシュボードで行きたい場所を選ぶとルートを生成してくれます。  
 ダッシュボードにはAIキャラクターたちのおすすめスポットが表示される機能を開発中です。  
   
-## other products  
-comming soon...  
+## comming soon...  
+  
+  
+  
+<div id="img">
+  <img src="Cheeeez1-1.png" alt="">
+</div>
 
+写真をとることに疲れ、今を楽しめないのはもったいない。  
+Cheeeez（仮）は大切な瞬間を逃さない自動映えシーン認識/記録アプリです。  
+空中から良い角度でシーンを記録します。  
+  
+<div id="img">
+  <img src="プレゼンテーション2.jpg" alt="">
+</div>
+  
+自分のやりたいことに意識を集中したい  
+傘、ナビ、カメラ…煩わしい動作から手を解放するフライアブルサービスを開発中です。
 
 
 ## ■MEMBER■□■□■□■□■□  
@@ -57,7 +71,9 @@ K(Ph.D.)
 ♪ソフトウェア品質管理  
 ♪知的財産管理  
   
-T【Dream Conductor Unaffiliated Director】  
+![T](T.png)
+T  
+【Dream Conductor Unaffiliated Director】  
 ♪営業  
 ♪ビジネスアドバイザ  
   
