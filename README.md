@@ -14,7 +14,7 @@
 [■MOVIE■](https://www.youtube.com/channel/UCV285Ke2ubPht54D4sOOsqw)  
 [■BLOG■](https://knalaboratory.hatenablog.com/)  
 
-## ■PRODUCTS■□■□■□■□■□■□■□■□
+## ■PRODUCTS■□■□■□■□■□■□
 <div id="img">
   <a href="https://play.google.com/store/apps/details?id=com.laboratory.kna.cyclip&hl=ja">
   <img src="cYclip.png" alt="">
@@ -26,7 +26,30 @@ cYclipは自転車乗り向けアプリです。
 ダッシュボードで行きたい場所を選ぶとルートを生成してくれます。  
 ダッシュボードにはAIキャラクターたちのおすすめスポットが表示される機能を開発中です。  
   
-## ■other products  
+## other products  
 comming soon...
 
-## ■□■□■□■□■□■□■□■□■□■□■□■□
+## ■MEMBER■□■□■□■□■□■□■□
+
+[TAN2](https://twitter.com/TatsuyaMori3)【Technology Designer】
+　ビジョン策定
+　コア技術開発
+
+B.B(Ph.D.)【Service Design Architect】
+　コア技術開発
+　アプリケーション実装
+
+K(Ph.D.)【Business Development Director】
+　メカ技術開発
+　ビジネスモデル策定
+
+[おみー](https://twitter.com/MTRunners)【Technology Artist】
+　デザイン・音楽
+　ソフトウェア品質管理
+　知的財産管理
+
+T【Dream Conductor Unaffiliated Director】
+　営業
+　ビジネスアドバイザ
+
+## ■□■□■□■□■□■□■□■□■□■
