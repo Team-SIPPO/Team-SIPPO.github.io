@@ -30,19 +30,22 @@ cYclipは自転車乗り向けアプリです。
 comming soon...  
 
 ## ■MEMBER■□■□■□■□■□  
-<img src="TAN2.png" align=left>  
+<img src="TAN2.png" align="left">
 [TAN2](https://twitter.com/TatsuyaMori3)【Technology Designer】  
 　ビジョン策定  
 　コア技術開発  
   
+<img src="B.B..png" align="left">
 ♪B.B(Ph.D.)【Service Design Architect】  
 　コア技術開発  
 　アプリケーション実装  
   
+<img src="K.png" align="left">
 ♪K(Ph.D.)【Business Development Director】  
 　メカ技術開発  
 　ビジネスモデル策定  
   
+<img src="おみー.png" align="left">
 ♪[おみー](https://twitter.com/MTRunners)【Technology Artist】  
 　デザイン・音楽  
 　ソフトウェア品質管理  
