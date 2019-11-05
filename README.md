@@ -49,6 +49,13 @@ Cheeeez（仮）は大切な瞬間を逃さない自動映えシーン認識/記
 傘、ナビ、カメラ…煩わしい動作から手を解放するフライアブルサービスを開発中です。
   
   
+★感情推定AI  
+<div id="img">
+  <img src="CM.jpg" alt="">
+</div>
+  
+動画を分析し、人物の感情を推定する人工知能を開発中です。  
+    
 ## ■MEMBER■□■□■□■□■□  
 ![TAN2](TAN2.png)  
 [TAN2](https://twitter.com/TatsuyaMori3)  
