@@ -12,7 +12,7 @@
 
 [■REPOSITORY■](https://github.com/Team-SIPPO?tab=repositories)  
 [■MOVIE■](https://www.youtube.com/channel/UCV285Ke2ubPht54D4sOOsqw)  
-[■BLOG■](https://knalaboratory.hatenablog.com/)  
+[■BLOG■](https://note.mu/team_sippo/m/m8700090081c2)  
 [■CONTACT US■](<mailto:team.sippo@gmail.com>)  
 ## ■PRODUCTS■□■□■□■□
 <div id="img">
