@@ -40,10 +40,8 @@ Cheeeez（仮）は大切な瞬間を逃さない自動映えシーン認識/記
 空中から良い角度でシーンを記録します。  
   
   
-★Flyable service  
-<div id="img">
-  <img src="プレゼンテーション2.jpg" alt="">
-</div>
+★Flyable service
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/VnRiD0piabc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
 自分のやりたいことに意識を集中したい  
 傘、ナビ、カメラ…煩わしい動作から手を解放するフライアブルサービスを開発中です。
