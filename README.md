@@ -67,8 +67,8 @@ Cheeeez（仮）は大切な瞬間を逃さない自動映えシーン認識/記
 ♪コア技術開発  
 ♪アプリケーション実装  
   
-![K](K.png)  
-K(Ph.D.)  
+！[K] （K.png）  
+[K（Ph.D。）](https://twitter.com/KKsippo1)  
 【Business Development Director】  
 ♪メカ技術開発  
 ♪ビジネスモデル策定  
