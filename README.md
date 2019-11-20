@@ -1,4 +1,4 @@
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.png">
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
 <div id="img">
 <img src="S!PPO2.png" alt="">
 </div>
