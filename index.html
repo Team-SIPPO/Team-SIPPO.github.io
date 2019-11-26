@@ -39,20 +39,6 @@
 
         gtag('config', 'UA-152041046-1');
     </script>
-    <script>
-        /**
-        * アナリティクスでアウトバウンド リンクのクリックを測定する関数。
-        * この関数では有効な URL 文字列を引数として受け取り、その URL 文字列を
-        * イベントのラベルとして使用する。transport メソッドを 'beacon' に設定すると
-        * 対応ブラウザでは 'navigator.sendBeacon' を使ってヒットが送信される。
-        */
-        var captureOutboundLink = function(url) {
-           ga('send', 'event', 'outbound', 'click', url, {
-             'transport': 'beacon',
-             'hitCallback': function(){document.location = url;}
-           });
-        }
-    </script>
 </head>
 
     
@@ -92,7 +78,7 @@
                         <h1>Flyable Service</h1>
                         <h3 class="title text-center">produced by Team-S!PPO</h3>
                         <a href="https://www.youtube.com/watch?v=VnRiD0piabc" target="_blank"
-                            class="btn btn-danger btn-raised btn-lg" onclick="captureOutboundLink('https://www.youtube.com/watch?v=VnRiD0piabc'); return false;">
+                            class="btn btn-danger btn-raised btn-lg">
                             <i class="fa fa-play"></i> Watch video
                         </a>
                     </div>
