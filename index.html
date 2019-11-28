@@ -39,16 +39,17 @@
 
         gtag('config', 'UA-152041046-1');
     </script>
+
 </head>
 
     
 <body>
-    <!--
-    <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100">
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+        id="sectionsNav">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
-                    Material Kit </a>
+                <a class="navbar-brand" href="https://team-sippo.github.io/">
+                    S!PPO </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -59,17 +60,68 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="material-icons">apps</i> Components
+                        </a>
+    
+                        <div class="dropdown-menu dropdown-with-icons">
+                            <a href="../index.html" class="dropdown-item">
+                                <i class="material-icons">layers</i> All Components
+                            </a>
+                            <a href="https://demos.creative-tim.com/material-kit/docs/2.1/getting-started/introduction.html"
+                                class="dropdown-item">
+                                <i class="material-icons">content_paste</i> Documentation
+                            </a>
+                        </div>
+                    </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="material-icons">apps</i> Template
+                        <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+                            <i class="material-icons">cloud_download</i> Download
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                            href="https://note.com/team_sippo/m/m8700090081c2" target="_blank"
+                            data-original-title="活動日誌！">
+                            <i class="fa fa-sticky-note"></i> note
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                            href="https://note.com/team_sippo/m/m8700090081c2" target="_blank"
+                            data-original-title="Youtube">
+                            <i class="fa fa-sticky-note"></i> note
+                        </a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <script src="https://apis.google.com/js/platform.js"></script>
+                        <div class="g-ytsubscribe nav-link" data-channel="korokoror" 
+                        data-layout="full" data-theme="dark" data-count="default"
+                        rel="tooltip" title="" data-placement="bottom"
+                            href="https://twitter.com/CreativeTim" target="_blank"
+                            data-original-title="Follow us on Twitter"></div>    
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                            href="https://www.facebook.com/CreativeTim" target="_blank"
+                            data-original-title="Like us on Facebook">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                            href="https://www.instagram.com/CreativeTimOfficial" target="_blank"
+                            data-original-title="Follow us on Instagram">
+                            <i class="fa fa-instagram"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    -->
-    
+
     <div class="page-header header-filter" data-parallax="true"
         style="background-image: url('assets/images/pv.gif')">
         <div class="container">
@@ -78,7 +130,7 @@
                     <div class="brand text-center">
                         <h1>Flyable Service</h1>
                         <a onclick="ga('send', 'event', 'click_link', 'click', 'youtube_flyable');" href="https://www.youtube.com/watch?v=VnRiD0piabc" target="_blank" class="btn btn-danger btn-raised btn">
-                            <i class="fa fa-play"></i> Flyable Vision video
+                            <i class="fa fa-play"></i> Vision video
                         </a>
                         <h3 class="title text-center">produced by Team-S!PPO</h3>
                         <!--a href="https://www.youtube.com/watch?v=VnRiD0piabc?banner=x" target="_blank"
@@ -86,17 +138,9 @@
                     </div>
                 </div>    
             </div>
-            <div class="row">
-                <div class="col-md-2 ml-auto mr-auto">
-                    <a href="https://note.com/team_sippo/m/m8700090081c2" target="_blank">
-                        <script src="https://apis.google.com/js/platform.js"></script>
-                        <div class="g-ytsubscribe center-block" data-channel="korokoror" data-layout="full" data-theme="dark" data-count="default"></div>    
-                        <img src="./assets/images/note_logo/White/png/logo_White.png" alt="Thumbnail Image" class="img-fluid center-block">
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
+
 
 
 
@@ -286,37 +330,50 @@
                     </div>
                 </div>
             </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <nav class="float-left">
+                <ul>
+                    <li>
+                        <a href="https://github.com/Team-SIPPO?tab=repositories">
+                            Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/user/korokoror">
+                            Movie
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://note.mu/team_sippo/m/m8700090081c2">
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright float-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made with <i class="material-icons">favorite</i> by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </div>
+        </div>
+    </footer>
+    <!--   Core JS Files   -->
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+  <script src="./assets/js/material-kit.js?v=2.0.6" type="text/javascript"></script>
 
-                <footer class="footer footer-default">
-                    <div class="container">
-                        <nav class="float-left">
-                            <ul>
-                                <li>
-                                    <a href="https://github.com/Team-SIPPO?tab=repositories">
-                                        Repository
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.youtube.com/user/korokoror">
-                                        Movie
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://note.mu/team_sippo/m/m8700090081c2">
-                                        Blog
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright float-right">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, made with <i class="material-icons">favorite</i> by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-                        </div>
-                    </div>
-                </footer>
 
 </body>
 
