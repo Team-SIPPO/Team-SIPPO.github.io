@@ -1,17 +1,18 @@
 import { PortfolioTile } from '../molecules/PortfolioTile';
+import { TileGridSection } from './TileGridSection';
 
 export function MemberPortfolioGrid({ member }) {
   return (
-    <section className="member-portfolio-section" aria-labelledby="member-portfolio-title">
-      <h2 id="member-portfolio-title" className="member-section-title">
-        portfolio
-      </h2>
-
-      <div className="member-portfolio-grid">
-        {member.portfolio.map((item, index) => (
-          <PortfolioTile key={`${member.slug}-${index}`} item={item} />
-        ))}
-      </div>
-    </section>
+    <TileGridSection
+      ariaLabelledBy="member-portfolio-title"
+      title="portfolio"
+      titleId="member-portfolio-title"
+      titleClassName="member-section-title"
+      sectionClassName="member-portfolio-section"
+      gridClassName="member-portfolio-grid"
+      items={member.portfolio}
+      getKey={(item, index) => `${member.slug}-${index}`}
+      renderItem={(item) => <PortfolioTile item={item} />}
+    />
   );
 }

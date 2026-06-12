@@ -24,6 +24,26 @@ export default {
       boxShadow: {
         tag: '6px 7px 0 rgba(0, 0, 0, 0.18)',
       },
+      maxWidth: {
+        'container-narrow': 'var(--container-narrow)',
+        'container-default': 'var(--container-default)',
+        'container-wide': 'var(--container-wide)',
+        reading: 'var(--reading)',
+      },
+      spacing: {
+        'page-top': 'var(--pad-y-top)',
+        'page-bottom': 'var(--pad-y-bottom)',
+        'page-x': 'var(--pad-x)',
+      },
+      gap: {
+        grid: 'var(--gap-grid)',
+        section: 'var(--gap-section)',
+      },
+      fontSize: {
+        'h1-hero': 'var(--fs-h1-hero)',
+        'h2-section': 'var(--fs-h2-section)',
+        'h3-sub': 'var(--fs-h3-sub)',
+      },
     },
   },
   plugins: [],

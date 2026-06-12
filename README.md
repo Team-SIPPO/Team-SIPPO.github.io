@@ -14,6 +14,72 @@
 - GitHub Actions
 - GitHub Pages
 
+## デザインガイドライン
+
+Typography の基準値は [site-src/src/index.css](/home/omi-/projects/HP/site-src/src/index.css#L7) の `:root` を source of truth とする。  
+個別コンポーネントで新しい `font-family` や任意の `font-size` を直接増やさず、既存 token を利用すること。
+
+### フォントファミリー
+
+- 基本フォント: `IBM Plex Sans JP`
+- fallback: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+
+### フォントウェイト
+
+- `400`: 通常本文、ページタイトル、カードタイトル
+- `700`: 強調文、年号、短いラベル
+
+### タイポグラフィ scale
+
+| 用途 | Token | 値 |
+| --- | --- | --- |
+| ページタイトル | `--fs-h1-hero` | `32px / 38px / 44px` |
+| セクションタイトル | `--fs-h2-section` | `24px / 26px / 28px` |
+| 強調見出し | `--fs-h3-sub` | `18px / 19px / 20px` |
+| 本文大 | `--fs-body-lg` | `17px` |
+| 本文標準 | `--fs-body-md` | `15px` |
+| 本文小 | `--fs-body-sm` | `13px` |
+| タイル補助見出し | `--fs-tile-meta` | `16px` |
+| ラベル | `--fs-label-md` | `14px` |
+| 小ラベル | `--fs-label-sm` | `12px` |
+| caption | `--fs-caption` | `11px` |
+| micro caption | `--fs-micro` | `10px` |
+
+### 行間
+
+- 見出し: `--lh-heading = 1.2`
+- 短文タイトル: `--lh-title = 1.35`
+- 本文: `--lh-reading = 1.85`
+- リード文: `--lh-reading-relaxed = 1.9`
+
+### インタラクション / タイル
+
+- tile hover duration: `--motion-tile-duration = 240ms`
+- tile hover transform: `--motion-tile-hover-transform = translateY(-3px) rotate(-6deg)`
+- tile section 見出しと grid の間隔: `--tile-section-grid-gap`
+- media tile の `image -> meta` 間隔: `--media-tile-meta-gap`
+- media tile の `meta -> rule -> title` 間隔: `--media-tile-rule-gap`
+
+`news / members / portfolio / activities history` のような image + meta + rule + title 構成は、上記 token を基準にそろえる。  
+個別ページで差が必要な場合は、component 側ではなく class 単位の CSS variable override で調整する。
+
+tile 一覧 section は [TileGridSection.jsx](/home/omi-/projects/HP/site-src/src/components/organisms/TileGridSection.jsx#L1) を共通 organism とする。  
+`NewsBoard / MembersGrid / ActivityHistoryGrid / MemberPortfolioGrid` で同じ section 構造を重複定義しない。
+
+### アラインメント
+
+- ページ単位の `h1` と lead は中央揃えを基本とする
+- card / tile の grid は container 中央に配置する
+- 長文本文は、container 自体を中央に置いたうえで本文のみ左揃えにする
+- 新規 page を追加する場合、まず [PageIntro.jsx](/home/omi-/projects/HP/site-src/src/components/molecules/PageIntro.jsx#L1) の中央揃えパターンを使う
+
+### 運用ルール
+
+- `h1` はページ単位の主見出しのみに使用する。
+- 同じ役割の要素には同じ token を使う。例: `members / news / portfolio` の tile 見出し。
+- 新しいサイズが必要な場合は、まず既存 token で代替できないか確認する。
+- 新規 token を追加する場合は `:root` と本節の両方を更新する。
+
 ## 前提環境
 
 - Node.js 22 系

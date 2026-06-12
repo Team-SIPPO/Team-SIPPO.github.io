@@ -1,11 +1,15 @@
 import { NewsTile } from '../molecules/NewsTile';
+import { TileGridSection } from './TileGridSection';
 
 export function NewsBoard({ items }) {
   return (
-    <section className="news-board" aria-label="お知らせ">
-      {items.map((item) => (
-        <NewsTile key={item.id} item={item} />
-      ))}
-    </section>
+    <TileGridSection
+      ariaLabel="お知らせ"
+      sectionClassName="news-section"
+      gridClassName="news-board"
+      items={items}
+      getKey={(item) => item.id}
+      renderItem={(item) => <NewsTile item={item} />}
+    />
   );
 }

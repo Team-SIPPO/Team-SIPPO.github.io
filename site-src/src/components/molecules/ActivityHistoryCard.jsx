@@ -4,10 +4,10 @@ import { IconImage } from '../atoms/IconImage';
 function ActivityHistoryCardBody({ item }) {
   return (
     <>
-      <IconImage className="activity-history-image" name={item.image} alt="" />
-      <span className="activity-history-year">{item.year}</span>
-      <span className="activity-history-rule" aria-hidden="true" />
-      <span className="activity-history-name">{item.title}</span>
+      <IconImage className="media-tile-image activity-history-image" name={item.image} alt="" />
+      <span className="media-tile-meta activity-history-year">{item.year}</span>
+      <span className="media-tile-rule activity-history-rule" aria-hidden="true" />
+      <span className="media-tile-title activity-history-name">{item.title}</span>
     </>
   );
 }
@@ -15,7 +15,7 @@ function ActivityHistoryCardBody({ item }) {
 export function ActivityHistoryCard({ item }) {
   if (item.to) {
     return (
-      <Link className="activity-history-card" to={item.to}>
+      <Link className="media-tile activity-history-card" to={item.to}>
         <ActivityHistoryCardBody item={item} />
       </Link>
     );
@@ -24,7 +24,7 @@ export function ActivityHistoryCard({ item }) {
   if (item.href) {
     return (
       <a
-        className="activity-history-card"
+        className="media-tile activity-history-card"
         href={item.href}
         target="_blank"
         rel="noreferrer noopener"
@@ -35,7 +35,7 @@ export function ActivityHistoryCard({ item }) {
   }
 
   return (
-    <article className="activity-history-card">
+    <article className="media-tile activity-history-card">
       <ActivityHistoryCardBody item={item} />
     </article>
   );

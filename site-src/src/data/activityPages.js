@@ -50,7 +50,7 @@ export const activityPages = {
     items: [
       {
         year: '2021',
-        title: '家庭用マッサージチェア課金制化IoT「ちょりん君」提供',
+        title: '家庭用マッサージチェア課金制化IoT『ちょりん君』提供',
         image: 'activity-comingsoon.png',
       },
     ],

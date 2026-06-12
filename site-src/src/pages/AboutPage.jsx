@@ -1,5 +1,5 @@
+import { PageIntro } from '../components/molecules/PageIntro';
 import { AboutCopySection } from '../components/organisms/AboutCopySection';
-import { AboutHeroSection } from '../components/organisms/AboutHeroSection';
 
 const aboutCopyGroups = [
   ['しっぽにちは。 Team-S!PPOです。'],
@@ -24,9 +24,13 @@ const aboutCopyGroups = [
 
 export function AboutPage() {
   return (
-    <main className="about-main">
-      <h1 className="about-page-title">About us</h1>
-      <AboutHeroSection />
+    <main className="page-main">
+      <PageIntro
+        title="About us"
+        lead={['technologies for your smile', '-技術であなたを笑顔に-']}
+        image="top-image.png"
+        align="center"
+      />
       <AboutCopySection groups={aboutCopyGroups} />
     </main>
   );

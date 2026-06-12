@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
+import { PageIntro } from '../components/molecules/PageIntro';
 
 export function NotFoundPage() {
   return (
     <main className="page-main">
-      <section className="notfound">
-        <p className="page-kicker">404</p>
-        <h1 className="page-title">Page not found</h1>
+      <PageIntro eyebrow="404" title="Page not found" align="center" />
+      <div className="notfound">
         <Link className="text-link" to="/">
           back home
         </Link>
-      </section>
+      </div>
     </main>
   );
 }

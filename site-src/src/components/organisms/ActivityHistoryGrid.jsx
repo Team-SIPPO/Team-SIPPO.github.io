@@ -1,14 +1,17 @@
 import { ActivityHistoryCard } from '../molecules/ActivityHistoryCard';
+import { TileGridSection } from './TileGridSection';
 
 export function ActivityHistoryGrid({ title, items }) {
   return (
-    <section className="activity-history-section" aria-label={`${title} history`}>
-      <h2 className="activity-history-title">history</h2>
-      <div className={`activity-history-grid${items.length === 1 ? ' is-single' : ''}`}>
-        {items.map((item) => (
-          <ActivityHistoryCard key={`${item.year}-${item.title}`} item={item} />
-        ))}
-      </div>
-    </section>
+    <TileGridSection
+      ariaLabel={`${title} history`}
+      title="history"
+      titleClassName="activity-history-title"
+      sectionClassName="activity-history-section"
+      gridClassName="activity-history-grid"
+      items={items}
+      getKey={(item) => `${item.year}-${item.title}`}
+      renderItem={(item) => <ActivityHistoryCard item={item} />}
+    />
   );
 }

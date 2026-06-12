@@ -9,6 +9,7 @@ export function ContactPage() {
         title="Hello, Techreate"
         lead={['活動や制作についての連絡は、各SNSからどうぞ。']}
         image="logo.png"
+        align="center"
       />
       <ContactLinks />
     </main>

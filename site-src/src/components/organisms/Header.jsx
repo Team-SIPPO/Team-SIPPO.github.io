@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <header className="relative z-30 bg-white">
-      <div className="mx-auto flex h-[88px] max-w-[920px] items-center justify-between px-6 md:translate-x-[28px] md:justify-start md:gap-[140px]">
+      <div className="mx-auto flex h-[88px] max-w-[920px] items-center justify-between px-page-x md:translate-x-[28px] md:justify-start md:gap-[140px]">
         <Link className="logo-link block h-[54px] w-[57px]" to="/" aria-label="Techreate home" onClick={closeMenu}>
           <IconImage className="h-full w-full object-contain" name="logo.png" />
         </Link>
@@ -30,11 +30,11 @@ export function Header() {
 
         <nav
           id="site-navigation"
-          className={`${isOpen ? 'flex' : 'hidden'} absolute left-0 right-0 top-[88px] flex-col gap-2 border-y border-black bg-white px-6 py-4 md:static md:flex md:flex-row md:items-center md:gap-[94px] md:border-0 md:p-0`}
+          className={`${isOpen ? 'flex' : 'hidden'} absolute left-0 right-0 top-[88px] flex-col gap-2 border-y border-black bg-white px-page-x py-4 md:static md:flex md:flex-row md:items-center md:gap-[94px] md:border-0 md:p-0`}
           aria-label="サイト"
         >
           {navigation.map((item) => (
-            <NavItem key={item.label} item={item} onNavigate={closeMenu} />
+            <NavItem key={item.label} item={item} onNavigate={closeMenu} menuOpen={isOpen} />
           ))}
         </nav>
       </div>
