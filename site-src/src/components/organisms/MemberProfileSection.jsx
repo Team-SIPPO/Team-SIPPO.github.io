@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { IconImage } from '../atoms/IconImage';
 import { MemberDetailRow } from '../molecules/MemberDetailRow';
-import { wixMediaAsset } from '../../lib/wixMedia';
+import { asset } from '../../lib/asset';
 
 function MemberSocialLinks({ member }) {
   const links = [
@@ -67,7 +67,7 @@ export function MemberProfileSection({ member }) {
 
         <IconImage
           className="member-photo-hero"
-          src={wixMediaAsset(member.image)}
+          src={asset(member.image)}
           alt={member.name}
           loading="eager"
         />

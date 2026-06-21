@@ -1,33 +1,21 @@
 /** @type {import('tailwindcss').Config} */
-const techreateFontStack = [
-  '"IBM Plex Sans JP"',
-  'system-ui',
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'sans-serif',
-];
-
 export default {
   content: ['./site-src/**/*.{html,js,jsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: techreateFontStack,
-        techreate: techreateFontStack,
+        sans: ['"IBM Plex Sans JP"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
       },
       colors: {
-        ink: '#070707',
-        techYellow: '#fff000',
-        lineGray: '#c7c7c7',
-      },
-      boxShadow: {
-        tag: '6px 7px 0 rgba(0, 0, 0, 0.18)',
+        // 値は index.css の :root が正(二重管理しない)
+        ink: 'var(--color-ink)',
+        accent: 'var(--color-accent)',
       },
       maxWidth: {
         'container-narrow': 'var(--container-narrow)',
         'container-default': 'var(--container-default)',
         'container-wide': 'var(--container-wide)',
+        'container-board': 'var(--container-board)',
         reading: 'var(--reading)',
       },
       spacing: {

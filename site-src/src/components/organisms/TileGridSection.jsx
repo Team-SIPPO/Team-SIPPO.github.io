@@ -1,40 +1,21 @@
 import { Fragment } from 'react';
 
-export function TileGridSection({
-  ariaLabel,
-  ariaLabelledBy,
-  title,
-  titleId,
-  sectionClassName = '',
-  titleClassName = '',
-  gridClassName = '',
-  items,
-  getKey,
-  renderItem,
-}) {
-  const sectionClassNames = ['tile-section', sectionClassName].filter(Boolean).join(' ');
-  const titleClassNames = ['tile-section-title', titleClassName].filter(Boolean).join(' ');
-  const gridClassNames = [
-    'tile-section-grid',
-    gridClassName,
-    items.length === 1 ? 'is-single' : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
+export function TileGridSection({ ariaLabel, ariaLabelledBy, title, titleId, gridClassName, items, getKey, renderItem }) {
   const accessibilityProps = ariaLabelledBy
     ? { 'aria-labelledby': ariaLabelledBy }
     : { 'aria-label': ariaLabel };
 
+  const gridClass = ['tile-section-grid', gridClassName].filter(Boolean).join(' ');
+
   return (
-    <section className={sectionClassNames} {...accessibilityProps}>
+    <section className="tile-section" {...accessibilityProps}>
       {title ? (
-        <h2 id={titleId} className={titleClassNames}>
+        <h2 id={titleId} className="tile-section-title">
           {title}
         </h2>
       ) : null}
 
-      <div className={gridClassNames}>
+      <div className={gridClass}>
         {items.map((item, index) => (
           <Fragment key={getKey(item, index)}>{renderItem(item, index)}</Fragment>
         ))}

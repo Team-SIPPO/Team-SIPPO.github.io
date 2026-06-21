@@ -6,7 +6,7 @@ export function ActivityTag({ item }) {
     <>
       <span className={`connector-line ${item.lineClassName}`} aria-hidden="true" />
       <Link className={`activity-tag ${item.className}`} to={item.to} aria-label={item.label}>
-        <IconImage name={item.image} />
+        <IconImage name={item.image} alt="" />
       </Link>
     </>
   );

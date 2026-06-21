@@ -4,13 +4,13 @@ function NewsTileContent({ item }) {
   return (
     <>
       {item.image ? (
-        <IconImage className="media-tile-image news-thumb" name={item.image} />
+        <IconImage className="media-tile-image" name={item.image} />
       ) : (
-        <span className="media-tile-image news-thumb news-thumb-empty" aria-hidden="true" />
+        <span className="media-tile-image" aria-hidden="true" />
       )}
-      <time className="media-tile-meta news-meta">{item.date}</time>
-      <span className="media-tile-rule news-rule" aria-hidden="true" />
-      <h2 className="media-tile-title news-title" title={item.fullTitle}>
+      <time className="media-tile-meta">{item.date}</time>
+      <span className="media-tile-rule" aria-hidden="true" />
+      <h2 className="media-tile-title" title={item.fullTitle}>
         {item.title}
       </h2>
     </>
@@ -20,7 +20,7 @@ function NewsTileContent({ item }) {
 export function NewsTile({ item }) {
   if (!item.href) {
     return (
-      <article className="media-tile news-tile" aria-label={item.fullTitle}>
+      <article className="media-tile" aria-label={item.fullTitle}>
         <NewsTileContent item={item} />
       </article>
     );
@@ -28,7 +28,7 @@ export function NewsTile({ item }) {
 
   return (
     <a
-      className="media-tile news-tile"
+      className="media-tile"
       href={item.href}
       target="_blank"
       rel="noreferrer noopener"

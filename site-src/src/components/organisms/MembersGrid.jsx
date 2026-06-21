@@ -6,7 +6,6 @@ export function MembersGrid() {
   return (
     <TileGridSection
       ariaLabel="メンバー"
-      sectionClassName="members-section"
       gridClassName="members-grid"
       items={members}
       getKey={(member) => member.slug}

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { wixMediaAsset } from '../../lib/wixMedia';
+import { asset } from '../../lib/asset';
 import { IconImage } from '../atoms/IconImage';
 
 export function MemberCard({ member }) {
@@ -7,7 +7,7 @@ export function MemberCard({ member }) {
     <Link className="media-tile member-card" to={`/members/${member.slug}`}>
       <IconImage
         className="media-tile-image member-photo"
-        src={wixMediaAsset(member.image)}
+        src={asset(member.image)}
         alt={member.name}
         loading="lazy"
       />

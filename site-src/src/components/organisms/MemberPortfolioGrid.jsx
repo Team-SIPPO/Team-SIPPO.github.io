@@ -7,9 +7,6 @@ export function MemberPortfolioGrid({ member }) {
       ariaLabelledBy="member-portfolio-title"
       title="portfolio"
       titleId="member-portfolio-title"
-      titleClassName="member-section-title"
-      sectionClassName="member-portfolio-section"
-      gridClassName="member-portfolio-grid"
       items={member.portfolio}
       getKey={(item, index) => `${member.slug}-${index}`}
       renderItem={(item) => <PortfolioTile item={item} />}

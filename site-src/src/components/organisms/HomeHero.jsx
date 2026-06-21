@@ -4,10 +4,9 @@ import { ActivityTag } from '../molecules/ActivityTag';
 
 export function HomeHero() {
   return (
-    <section className="mx-auto max-w-container-wide px-page-x pt-[132px] sm:pt-[150px]">
-      <h1 className="ml-0 text-left font-techreate text-[22px] font-normal leading-tight text-ink sm:ml-[160px] sm:text-[34px]">
-        Let&apos;s take a little <br className="sm:hidden" />
-        coffee break.
+    <section className="mx-auto max-w-container-wide px-page-x pt-[72px] sm:pt-[100px]">
+      <h1 className="text-center text-[22px] font-normal leading-tight text-ink sm:text-[34px]">
+        Let&apos;s take a little coffee break.
       </h1>
 
       <div className="hero-stage mx-auto mt-7">
