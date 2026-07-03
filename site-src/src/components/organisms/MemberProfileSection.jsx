@@ -40,23 +40,27 @@ export function MemberProfileSection({ member }) {
         &lt; Back
       </Link>
 
+      {/* PageIntro と同じ「ページタイトル層」: 名前=タイトル、肩書=アイブロウ、一言=リード */}
+      <header className="member-title">
+        <div className="member-heading">
+          <h1>{member.name}</h1>
+          <MemberSocialLinks member={member} />
+        </div>
+
+        <div className="member-role-block">
+          <p className="member-role">{member.role}</p>
+          {member.roleDetail ? <p className="member-role-detail">{member.roleDetail}</p> : null}
+        </div>
+
+        <div className="member-intro">
+          {introLines.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+      </header>
+
       <div className="member-hero">
-        <div>
-          <div className="member-intro">
-            {introLines.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
-
-          <div className="member-heading">
-            <h1>{member.name}</h1>
-            <div className="member-role-block">
-              <p className="member-role">{member.role}</p>
-              {member.roleDetail ? <p className="member-role-detail">{member.roleDetail}</p> : null}
-            </div>
-            <MemberSocialLinks member={member} />
-          </div>
-
+        <div className="member-profile-card">
           <dl className="member-detail-list">
             <MemberDetailRow label="趣味" lines={member.hobby} />
             <MemberDetailRow label="必殺技" lines={member.specialMove} />
@@ -65,12 +69,14 @@ export function MemberProfileSection({ member }) {
           </dl>
         </div>
 
-        <IconImage
-          className="member-photo-hero"
-          src={asset(member.image)}
-          alt={member.name}
-          loading="eager"
-        />
+        <div className="member-photo-card">
+          <IconImage
+            className="member-photo-hero"
+            src={asset(member.image)}
+            alt={member.name}
+            loading="eager"
+          />
+        </div>
       </div>
     </section>
   );

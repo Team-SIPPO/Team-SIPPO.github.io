@@ -1,5 +1,5 @@
 import { PageIntro } from '../components/molecules/PageIntro';
-import { ContactLinks } from '../components/organisms/ContactLinks';
+import { ContactForm } from '../components/organisms/ContactForm';
 
 export function ContactPage() {
   return (
@@ -7,11 +7,10 @@ export function ContactPage() {
       <PageIntro
         eyebrow="Contact us"
         title="Hello, Techreate"
-        lead={['活動や制作についての連絡は、各SNSからどうぞ。']}
-        image="logo.png"
+        lead={['ご質問やご協力のご提案など、お気軽にお問い合わせください。']}
         align="center"
       />
-      <ContactLinks />
+      <ContactForm />
     </main>
   );
 }

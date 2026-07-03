@@ -3,7 +3,6 @@ import { ScrollToTop } from './components/atoms/ScrollToTop';
 import { Footer } from './components/organisms/Footer';
 import { Header } from './components/organisms/Header';
 import { activityPages } from './data/activityPages';
-import { AboutPage } from './pages/AboutPage';
 import { WaterHardnessPage } from './pages/WaterHardnessPage';
 import { ActivityPage } from './pages/ActivityPage';
 import { ContactPage } from './pages/ContactPage';
@@ -24,7 +23,8 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/news/page/:pageNumber" element={<Navigate to="/news" replace />} />
-            <Route path="/about-us" element={<AboutPage />} />
+            {/* About us はLPの該当セクションへ(専用ページは廃止) */}
+            <Route path="/about-us" element={<Navigate to="/#about-us" replace />} />
             <Route path="/members" element={<MembersPage />} />
             <Route path="/members/:memberSlug" element={<MemberDetailPage />} />
             <Route path="/contactus" element={<ContactPage />} />
