@@ -5,6 +5,12 @@ function navClassName({ isActive }) {
   return `nav-link ${isActive ? 'is-active' : ''}`;
 }
 
+/* ハッシュ付きリンク(/#about-us など)はパスが "/" 扱いになり、
+   ホーム表示中に常時アクティブになってしまうため、アクティブ判定を無効にする */
+function isActiveFor(to, isActive) {
+  return isActive && !to.includes('#');
+}
+
 export function NavItem({ item, onNavigate, menuOpen }) {
   // ハンバーガーメニューを開いたときは全サブメニュー展開がデフォルト
   const [isExpanded, setIsExpanded] = useState(true);
@@ -15,7 +21,11 @@ export function NavItem({ item, onNavigate, menuOpen }) {
 
   if (!item.children) {
     return (
-      <NavLink className={navClassName} to={item.to} onClick={onNavigate}>
+      <NavLink
+        className={({ isActive }) => navClassName({ isActive: isActiveFor(item.to, isActive) })}
+        to={item.to}
+        onClick={onNavigate}
+      >
         {item.label}
       </NavLink>
     );
@@ -30,7 +40,9 @@ export function NavItem({ item, onNavigate, menuOpen }) {
     <div className={`nav-group ${isExpanded ? 'is-open' : ''}`}>
       {/* PC: リンク + ホバーでドロップダウン */}
       <NavLink
-        className={(state) => `${navClassName(state)} hidden md:inline-flex`}
+        className={({ isActive }) =>
+          `${navClassName({ isActive: isActiveFor(item.to, isActive) })} hidden md:inline-flex`
+        }
         to={item.to}
         onClick={onNavigate}
       >
@@ -51,7 +63,7 @@ export function NavItem({ item, onNavigate, menuOpen }) {
         {item.children.map((child) => (
           <NavLink
             key={child.label}
-            className={({ isActive }) => (isActive ? 'is-active' : '')}
+            className={({ isActive }) => (isActiveFor(child.to, isActive) ? 'is-active' : '')}
             to={child.to}
             onClick={handleChildClick}
           >
