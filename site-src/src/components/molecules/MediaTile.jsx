@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 /* 荷札カードの共通ラッパー。
    to(内部リンク) / href(外部リンク) / どちらも無し(記事) で要素を切り替える。

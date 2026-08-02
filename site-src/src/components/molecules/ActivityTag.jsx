@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 /* 荷札タグ(SVG製・画像不使用)
    - viewBox 基準で描くため、幅を変えれば文字ごと比率が追従する
