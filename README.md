@@ -132,7 +132,6 @@ npm run build
 対象ブランチ:
 
 - `master`
-- `redesign`
 
 上記ブランチへの push を契機に GitHub Actions が実行され、`dist/` を Pages artifact として deploy する。
 
