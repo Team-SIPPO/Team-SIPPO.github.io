@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { aboutCopyGroups } from '../../data/aboutCopy';
 import { members } from '../../data/members';
 import { MemberCard } from '../molecules/MemberCard';

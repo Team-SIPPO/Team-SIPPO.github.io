@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { newsItems } from '../../data/news';
 import { NewsTile } from '../molecules/NewsTile';
 

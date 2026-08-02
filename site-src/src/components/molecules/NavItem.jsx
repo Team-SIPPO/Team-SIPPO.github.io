@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 
 function navClassName({ isActive }) {
   return `nav-link ${isActive ? 'is-active' : ''}`;

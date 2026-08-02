@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { MemberPortfolioGrid } from '../components/organisms/MemberPortfolioGrid';
 import { MemberProfileSection } from '../components/organisms/MemberProfileSection';
 import { membersBySlug } from '../data/members';

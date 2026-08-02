@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { IconImage } from '../atoms/IconImage';
 import { MemberDetailRow } from '../molecules/MemberDetailRow';
 import { asset } from '../../lib/asset';
