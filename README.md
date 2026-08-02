@@ -131,7 +131,6 @@ npm run build
 
 対象ブランチ:
 
-- `main`
 - `master`
 - `redesign`
 
