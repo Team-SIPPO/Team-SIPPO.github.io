@@ -294,7 +294,7 @@ export const members = [
         "year": "2022",
         "title": "COGSCI 2022にて発表",
         "href": "https://escholarship.org/uc/item/1nd6k9vv",
-        "image": "portfolio/no-image.png"
+        "image": "portfolio/bb-06.jpg"
       },
       {
         "year": "2019",
