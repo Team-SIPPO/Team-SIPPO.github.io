@@ -292,6 +292,11 @@
     filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
   }
 
+  /* 先読み用の静止画(hidden)は、〜1023pxの display:block より優先して隠す */
+  .hero-person[hidden] {
+    display: none !important;
+  }
+
   .activity-tag {
     position: absolute;
     z-index: 4;
