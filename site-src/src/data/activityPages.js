@@ -71,6 +71,23 @@ export const activityPages = {
   },
   cafe: {
     title: 'Cafe Wa-create',
+    // ヒーロー: 座標はイラストの viewBox(1774×887)単位。cx/cy は円の中心、r は半径
+    hero: {
+      image: 'cafe-hero.svg',
+      alt: 'カフェでコーヒーを淹れたり、パソコンを広げたりしてくつろぐ人たちのイラスト',
+      width: 1774,
+      height: 887,
+      focusX: 0.42, // スマホで画面中央に来る横位置(0=左端, 1=右端)
+      spots: [
+        {
+          to: '/calc-waterhardness',
+          label: 'ざっくり水硬度計算機',
+          cx: 630,
+          cy: 378,
+          r: 64,
+        },
+      ],
+    },
     leadGroups: [
       ['情報技術を使って', 'もっと気軽にやりたいことをしたい'],
       ['ワクワク作って、ワイワイシェアできる', 'カフェのオープン準備中'],
