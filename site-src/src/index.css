@@ -1374,6 +1374,95 @@
   }
 }
 
+/* ========== Activity hero(イラスト + ホットスポット) ========== */
+
+.activity-hero {
+  margin-top: var(--gap-section);
+}
+
+.activity-hero-frame {
+  container-type: inline-size;
+  overflow: hidden;
+}
+
+.activity-hero-stage {
+  position: relative;
+  width: 100%;
+}
+
+.activity-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+/* 点線の円 = リンクの合図。円なので点線ごと回して「歩く点線」にする */
+.activity-hero-spot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border-radius: 50%;
+  transition: background-color 220ms ease, transform 220ms ease;
+}
+
+.activity-hero-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px dashed var(--color-ink);
+  border-radius: 50%;
+}
+
+.activity-hero-spot:hover,
+.activity-hero-spot:focus-visible {
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  transform: scale(1.06);
+  outline: none;
+}
+
+.activity-hero-spot:focus-visible::before {
+  border-style: solid;
+}
+
+/* 荷札カードと同じ視覚言語のラベル(紙・ink枠・黄色オフセット影) */
+.activity-hero-spot-label {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  padding: 4px 10px;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: var(--fs-label-sm);
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--color-accent);
+  transform: translateX(-50%) rotate(-3deg);
+  transition: box-shadow 220ms ease;
+}
+
+.activity-hero-spot:hover .activity-hero-spot-label,
+.activity-hero-spot:focus-visible .activity-hero-spot-label {
+  box-shadow: 5px 5px 0 var(--color-accent);
+}
+
+/* スマホ: 画面いっぱいに広げ、絵は最低 720px 幅を保って横を切り抜く。
+   focusX の位置を中央に寄せつつ、絵の端より外は見せない(clamp) */
+@media (max-width: 767px) {
+  .activity-hero {
+    margin-inline: calc(var(--pad-x) * -1);
+  }
+
+  .activity-hero-stage {
+    --hero-w: max(100cqw, 720px);
+    width: var(--hero-w);
+    transform: translateX(
+      calc(-1 * clamp(0px, var(--hero-focus-x) * var(--hero-w) - 50cqw, var(--hero-w) - 100cqw))
+    );
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

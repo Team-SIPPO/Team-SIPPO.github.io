@@ -1,4 +1,5 @@
 import { PageIntro } from '../components/molecules/PageIntro';
+import { ActivityHero } from '../components/organisms/ActivityHero';
 import { ActivityHistoryGrid } from '../components/organisms/ActivityHistoryGrid';
 
 export function ActivityPage({ page }) {
@@ -7,7 +8,8 @@ export function ActivityPage({ page }) {
   return (
     <main className="page-main">
       <PageIntro title={page.title} lead={leadLines} align="center" />
-      <ActivityHistoryGrid title={page.title} items={page.items} />
+      {page.hero ? <ActivityHero hero={page.hero} /> : null}
+      {page.items?.length ? <ActivityHistoryGrid title={page.title} items={page.items} /> : null}
     </main>
   );
 }
