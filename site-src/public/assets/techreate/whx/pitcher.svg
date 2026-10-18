@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="pitcher" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 186">
+  <path id="water" d="M26,108l-10,42c-4.3,18,6,28,24,28h160c18,0,28.3-10,24-28l-10-42H26Z" fill="#fff000" opacity=".55"/>
+  <ellipse id="water-surface" cx="120" cy="108" rx="94" ry="6.5" fill="#fff" opacity=".45"/>
+  <path id="body" d="M20,6c10,2,18,4,26,4h150c4.4,0,8,3.1,8,7s-3.6,7-8,7h-2l30,126c4.3,18-6,28-24,28H40c-18,0-28.3-10-24-28L46,24c-10-4-20-12-26-18Z" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <line id="rim-line" x1="46" y1="24" x2="194" y2="24" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="handle-outer" d="M196.9,36h13.1c30,0,42,6,42,26l-2,58c-.6,16-10,23-27.4,24" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="handle-inner" d="M200.2,50h11.8c20,0,26,6,26,16l-1.4,50c-.3,10-6.6,15-17.1,15" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+</svg>

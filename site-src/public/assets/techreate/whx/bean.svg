@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="bean" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48">
+  <path id="outline" d="M31.13,28.5c-3.73,9.21-11.73,14.67-17.87,12.19-6.15-2.48-8.11-11.97-4.39-21.19,3.73-9.21,11.73-14.67,17.87-12.19,6.15,2.48,8.11,11.97,4.39,21.19Z" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  <path id="center-line" d="M26.37,8.24c-8.94,6.09-3.8,25.43-12.74,31.52" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+</svg>

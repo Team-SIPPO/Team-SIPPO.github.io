@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="bottle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 280">
+  <path id="body" d="M43,33v11c0,26-31,34-31,68v146c0,12,8,18,20,18h56c12,0,20-6,20-18V112c0-34-31-42-31-68v-11" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="cap" d="M40,26V9c0-2.8,2.2-5,5-5h30c2.8,0,5,2.2,5,5v17" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <line id="cap-line" x1="40" y1="12" x2="80" y2="12" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+  <rect id="ring" x="36" y="26" width="48" height="7" rx="2" ry="2" fill="#fff000" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="string-loop" d="M43,37.5c4,4,30,4,34,0" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+  <path id="tag" d="M99.89,102.09l95.47,10.04c4.38.46,7.58,4.41,7.12,8.79l-10.45,99.45c-.46,4.38-4.41,7.58-8.79,7.12l-107.41-11.29c-4.38-.46-7.58-4.42-7.12-8.79l9.2-87.52,21.98-17.8Z" fill="#fff" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <line id="tag-rule" x1="93.1" y1="185.84" x2="174.65" y2="194.41" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+  <circle id="grommet" cx="99.58" cy="124.18" r="6.5" fill="#fff000" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+  <circle id="grommet-hole" cx="99.58" cy="124.18" r="2.8" fill="#fff" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+  <path id="string" d="M77,39c13,7,24,45,22.58,85.18" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+</svg>

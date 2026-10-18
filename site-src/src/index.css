@@ -644,291 +644,490 @@
     gap: 0;
   }
 
-  /* ざっくり水硬度計算機(白い紙+ink線画+黄アクセント。イラストはSVG製)
-     デスクトップは「2本のボトルがピッチャーへ注ぐ」構図、モバイルは縦積み */
-
-  /* 使い方の3ステップ(文章説明の代わり) */
-  .whx-steps {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px 28px;
-    margin: var(--gap-section) 0 0;
-    padding: 0;
-    list-style: none;
-    counter-reset: whx-step;
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-title);
-  }
-
-  .whx-steps li {
-    counter-increment: whx-step;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .whx-steps li::before {
-    content: counter(whx-step);
-    display: grid;
-    place-items: center;
-    width: 26px;
-    height: 26px;
-    border: 1.5px solid var(--color-ink);
-    border-radius: 50%;
-    background: var(--color-accent);
-    font-size: 13px;
-    font-weight: var(--fw-bold);
+  /* ざっくり水硬度計算機(白い紙+ink線画+黄アクセント)
+     イラストSVGは design/illustrations/water-hardness/ で生成し、Illustratorで編集する。
+     1段目「水A ─ 混ぜる割合 ─ 水B」、2段目「入力 ─ ピッチャー ─ 結果」の構図。
+     スライダーは硬度の物差し(左端=Aの硬度、右端=Bの硬度) */
+  .page-main--whx {
+    max-width: 1120px;
   }
 
   .whx-stage {
+    --whx-thumb: 34px;
+    --whx-field-bg: #efefef;
     position: relative;
-    width: min(100%, 820px);
-    aspect-ratio: 820 / 640;
-    margin: 44px auto 0;
+    margin: 36px auto 0;
   }
 
-  /* 注ぎの水流(ボトルの奥・ピッチャーの奥) */
-  .whx-streams {
+  /* つまみ → ピッチャーの口を結ぶ線(JSで実測して描く) */
+  .whx-connector {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 0;
     width: 100%;
     height: 100%;
+    overflow: visible;
     pointer-events: none;
   }
 
+  .whx-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* ---- 1段目 ---- */
+  .whx-mix {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 212px minmax(0, 1fr) 212px;
+    align-items: end;
+  }
+
   .whx-bottle {
-    position: absolute;
-    z-index: 3;
-    width: 44%;
+    margin: 0;
   }
 
-  .whx-bottle--a {
-    left: 0;
-    top: 2%;
-    transform: rotate(10deg);
+  /* タグ上の文字サイズはボトル幅に比例させる(cqw) */
+  .whx-bottle-art {
+    position: relative;
+    container-type: inline-size;
   }
 
-  .whx-bottle--b {
-    right: 0;
-    top: 33%;
-    transform: rotate(-10deg);
-  }
-
-  .whx-pitcher {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    z-index: 2;
-    width: 33%;
-    transform: translateX(-50%);
-  }
-
-  .whx-bottle svg,
-  .whx-pitcher svg {
+  .whx-bottle-art img {
     display: block;
     width: 100%;
     height: auto;
-    user-select: none;
   }
 
-  /* 「どの数字を入れるか」を一言で伝えるラベル */
-  .whx-chip {
+  /* bottle.svg のタグ枠(x80 y100 w124 h116, 6°)に合わせて重ねる。
+     build.mjs が出力する % をそのまま使う */
+  .whx-tag {
     position: absolute;
-    z-index: 2;
-    padding: 1px 10px;
-    border: 1.5px solid var(--color-ink);
-    border-radius: 999px;
-    background: var(--color-paper);
-    font-size: var(--fs-label-sm);
-    line-height: 1.7;
-    white-space: nowrap;
-  }
-
-  .whx-bottle .whx-chip {
-    top: -12px;
-  }
-
-  .whx-bottle--a .whx-chip {
-    left: 12%;
-  }
-
-  .whx-bottle--b .whx-chip {
-    left: 26%;
-  }
-
-  .whx-pitcher .whx-chip {
-    top: 8%;
-    left: 22%;
-  }
-
-  /* 入力欄はお問い合わせフォームと同じ語彙(ink枠+黄フォーカス) */
-  .whx-input {
-    position: absolute;
-    height: 27px;
-    padding: 0 8px;
-    border: 1px solid var(--color-ink);
-    border-radius: 6px;
-    background: var(--color-paper);
-    color: var(--color-ink);
-    font-family: inherit;
-    font-size: var(--fs-label-sm);
-    line-height: 1.4;
-    appearance: textfield;
-    transition: box-shadow 180ms ease;
-  }
-
-  .whx-input::placeholder {
-    color: #919191;
-  }
-
-  .whx-input:focus {
-    outline: none;
-    box-shadow: 3px 4px 0 var(--color-accent);
-  }
-
-  .whx-unit {
-    position: absolute;
-    font-size: var(--fs-label-sm);
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  /* ボトル内(viewBox 420x120 に対する%配置)。
-     デフォルト=キャップ左(ボトルB)、--a はキャップ右の反転ボトル */
-  .whx-bottle-cal {
-    left: 26%;
-    top: 18%;
-    width: 36%;
-  }
-
-  .whx-bottle-cal-unit {
-    left: 64%;
-    top: 25%;
-  }
-
-  .whx-bottle-mg {
-    left: 26%;
-    top: 57%;
-    width: 36%;
-  }
-
-  .whx-bottle-mg-unit {
-    left: 64%;
-    top: 64%;
-  }
-
-  .whx-bottle--a .whx-bottle-cal,
-  .whx-bottle--a .whx-bottle-mg {
-    left: 12%;
-  }
-
-  .whx-bottle--a .whx-bottle-cal-unit,
-  .whx-bottle--a .whx-bottle-mg-unit {
-    left: 50%;
-  }
-
-  /* ピッチャー内(viewBox 300x240 に対する%配置) */
-  .whx-pitcher-amount {
-    left: 18%;
-    top: 30%;
-    width: 46%;
-  }
-
-  .whx-pitcher-amount-unit {
-    left: 67%;
-    top: 35%;
-  }
-
-  .whx-pitcher-hardness {
-    left: 18%;
-    top: 52%;
-    width: 46%;
-  }
-
-  .whx-pitcher-hardness-unit {
-    left: 67%;
-    top: 57%;
-  }
-
-  /* 計算結果(各ボトルの近く。ピルは黄色) */
-  .whx-result {
-    position: absolute;
-    z-index: 4;
-    display: grid;
-    gap: 8px;
-    justify-items: start;
-    font-size: var(--fs-body-sm);
-    line-height: var(--lh-title);
-  }
-
-  .whx-result--a {
-    left: 49%;
-    top: 4%;
-  }
-
-  .whx-result--b {
-    right: 2%;
-    top: 57%;
-  }
-
-  .whx-result-line {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .whx-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 64px;
-    padding: 4px 16px;
-    border: 1.5px solid var(--color-ink);
-    border-radius: 999px;
-    background: var(--color-accent);
-    font-size: 20px;
-    font-weight: var(--fw-bold);
-    line-height: 1.5;
-  }
-
-  .whx-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 44px;
-  }
-
-  .whx-buttons .cta-button {
+    left: 37.74%;
+    top: 35.71%;
+    width: 58.49%;
+    height: 41.43%;
+    margin: 0;
+    padding: 0;
     border: 0;
-    font-family: inherit;
+    transform: rotate(6deg);
+    transform-origin: 0 0;
   }
 
-  .whx-clear {
-    padding: 12px 32px;
-    border: 1px solid var(--color-ink);
-    border-radius: 8px;
-    background: var(--color-paper);
+  .whx-tag-row {
+    position: absolute;
+    left: 20%;
+    right: 12%;
+    display: grid;
+    grid-template-columns: 2.4em minmax(0, 1fr);
+    align-items: center;
+    font-size: 7cqw;
+    line-height: 1;
+  }
+
+  .whx-tag-row:nth-of-type(1) {
+    top: 23%;
+  }
+
+  .whx-tag-row:nth-of-type(2) {
+    top: 45%;
+  }
+
+  .whx-tag-key {
+    font-size: 0.9em;
+  }
+
+  .whx-tag-input {
+    width: 100%;
+    min-width: 0;
+    height: 1.55em;
+    padding: 0 0.3em;
+    border: 0;
+    border-radius: 3px;
+    background: var(--whx-field-bg);
     color: var(--color-ink);
     font-family: inherit;
-    font-size: var(--fs-body-md);
-    font-weight: var(--fw-bold);
-    cursor: pointer;
-    transition: all 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    font-size: 1em;
+    text-align: right;
+    -moz-appearance: textfield;
   }
 
-  .whx-clear:hover,
-  .whx-clear:focus-visible {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  .whx-tag-input::-webkit-outer-spin-button,
+  .whx-tag-input::-webkit-inner-spin-button,
+  .whx-field-input::-webkit-outer-spin-button,
+  .whx-field-input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  .whx-tag-input::placeholder,
+  .whx-field-input::placeholder {
+    color: #b3b3b3;
+    font-size: 0.75em;
+  }
+
+  /* 未入力の必須欄は黄色で目立たせる */
+  .whx-tag-input:required:placeholder-shown,
+  .whx-field-input:required:placeholder-shown {
+    background: var(--color-accent);
+  }
+
+  .whx-tag-input:required:placeholder-shown::placeholder,
+  .whx-field-input:required:placeholder-shown::placeholder {
+    color: #6b6b6b;
+  }
+
+  .whx-tag-input:focus-visible,
+  .whx-field-input:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 1px;
+    background: var(--color-accent);
+  }
+
+  .whx-tag-unit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 77%;
+    font-size: 5.6cqw;
+    text-align: center;
+  }
+
+  /* ボトル本体(svgのx12〜108)の真下にキャプション */
+  .whx-bottle-caption {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    width: 56.6%;
+    margin-top: 8px;
+  }
+
+  .whx-bottle-name {
+    font-size: var(--fs-body-lg);
+    letter-spacing: 0.08em;
+  }
+
+  .whx-bottle-hardness {
+    padding: 1px 10px;
+    border: 1px solid var(--color-ink);
+    border-radius: 999px;
+    font-size: var(--fs-label-sm);
+    white-space: nowrap;
+  }
+
+  /* 混ぜる割合: 水Aのタグの下まで食い込ませ、ボトルの間いっぱいに伸ばす */
+  .whx-ratio {
+    display: grid;
+    justify-items: center;
+    margin: 0 8px 26px -84px;
+  }
+
+  .whx-ratio-title {
+    margin-bottom: 2px;
+    font-size: var(--fs-body-md);
+  }
+
+  .whx-track {
+    position: relative;
+    width: 100%;
+    padding: 0 6px;
+  }
+
+  /* 両端の留め具 */
+  .whx-track::before,
+  .whx-track::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 7px;
+    height: 30px;
+    border: 2px solid var(--color-ink);
+    border-radius: 3px;
+    background: var(--color-paper);
+    transform: translateY(-50%);
+  }
+
+  .whx-track::before {
+    left: 0;
+  }
+
+  .whx-track::after {
+    right: 0;
+  }
+
+  .whx-slider {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: var(--whx-thumb);
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .whx-slider:disabled {
+    cursor: not-allowed;
+  }
+
+  .whx-slider::-webkit-slider-runnable-track {
+    height: 10px;
+    border: 2px solid var(--color-ink);
+    border-radius: 6px;
+    background: #e6e6e6;
+  }
+
+  .whx-slider::-moz-range-track {
+    height: 6px;
+    border: 2px solid var(--color-ink);
+    border-radius: 6px;
+    background: #e6e6e6;
+  }
+
+  .whx-slider::-webkit-slider-thumb {
+    width: var(--whx-thumb);
+    height: var(--whx-thumb);
+    margin-top: calc((10px - 4px - var(--whx-thumb)) / 2);
+    border: 2.4px solid var(--color-ink);
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-paper);
+    transition: transform 160ms ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .whx-slider::-moz-range-thumb {
+    box-sizing: border-box;
+    width: var(--whx-thumb);
+    height: var(--whx-thumb);
+    border: 2.4px solid var(--color-ink);
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-paper);
+  }
+
+  .whx-slider:not(:disabled):active::-webkit-slider-thumb {
+    transform: scale(1.08);
+  }
+
+  .whx-slider:focus-visible {
+    outline: none;
+  }
+
+  .whx-slider:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .whx-slider:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .whx-slider:disabled::-webkit-slider-thumb {
+    background: var(--color-paper);
+  }
+
+  .whx-slider:disabled::-moz-range-thumb {
+    background: var(--color-paper);
+  }
+
+  .whx-ratio-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 6%;
+    font-size: var(--fs-body-lg);
+    letter-spacing: 0.04em;
+  }
+
+  .whx-ratio-labels b {
+    display: inline-block;
+    min-width: 2ch;
+    margin-left: 0.3em;
+    font-weight: var(--fw-regular);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .whx-ratio-hint {
+    margin: 0 0 12px;
+    color: #6b6b6b;
+    font-size: var(--fs-label-sm);
+  }
+
+  /* ---- 2段目 ---- */
+  .whx-make {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin-top: 72px;
+  }
+
+  .whx-fields {
+    display: grid;
+    justify-content: end;
+    gap: 18px;
+  }
+
+  .whx-field {
+    display: grid;
+    grid-template-columns: 5em 120px 3em;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .whx-field-label {
+    font-size: var(--fs-body-lg);
+  }
+
+  .whx-field-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--whx-field-bg);
+    color: var(--color-ink);
+    font-family: inherit;
+    font-size: 26px;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+
+  .whx-field-input:disabled {
+    color: #9a9a9a;
+    cursor: not-allowed;
+  }
+
+  .whx-field-input[aria-invalid="true"] {
+    outline: 2px dashed var(--color-ink);
+  }
+
+  .whx-field-unit {
+    font-size: var(--fs-body-lg);
+  }
+
+  .whx-field-range {
+    margin: -6px 0 0;
+    padding-left: calc(5em + 14px);
+    color: #6b6b6b;
+    font-size: var(--fs-label-sm);
+  }
+
+  .whx-pitcher {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .whx-result {
+    position: relative;
+    justify-self: start;
+    width: min(100%, 290px);
+  }
+
+  .whx-result-list {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-ink);
+  }
+
+  .whx-result-row {
+    display: grid;
+    grid-template-columns: 4.5em minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  .whx-result-row dt {
+    font-size: var(--fs-body-lg);
+  }
+
+  .whx-result-row dd {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .whx-result-value {
+    font-size: 44px;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .whx-result-unit {
+    width: 1.6em;
+    font-size: var(--fs-body-lg);
+  }
+
+  .whx-bean {
+    position: absolute;
+    right: -46px;
+    bottom: 2px;
+    width: 34px;
+    height: auto;
+  }
+
+  .whx-result-actual {
+    margin: 8px 0 0;
+    font-size: var(--fs-body-sm);
+    text-align: right;
+  }
+
+  .whx-guide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px 0 28px;
+    font-size: var(--fs-body-md);
+    text-align: left;
+  }
+
+  .whx-guide-chip {
+    flex: none;
+    width: 1.2em;
+    height: 1em;
+    border-radius: 3px;
+    background: var(--color-accent);
+    border: 1px solid var(--color-ink);
+  }
+
+  .whx-status {
+    position: relative;
+    z-index: 1;
+    min-height: 1.5em;
+    margin: 36px 0 0;
+    font-size: var(--fs-body-md);
+    text-align: center;
+  }
+
+  .whx-status:empty {
+    visibility: hidden;
   }
 
   .whx-note {
-    margin: var(--gap-section) 0 0;
-    text-align: center;
+    margin: 20px 0 0;
+    color: #6b6b6b;
     font-size: var(--fs-body-sm);
     line-height: var(--lh-title);
+    text-align: center;
   }
 
   .notfound {
@@ -1276,59 +1475,87 @@
   }
 
 }
-
-/* 計算機: 注ぎの構図は余裕のあるPC幅のみ。1023px以下は縦積み */
+/* 計算機: 1023px以下は2段目を「ピッチャー → 入力と結果を左右」に組み替える */
 @media (max-width: 1023px) {
-  .whx-stage {
-    display: grid;
-    gap: 24px;
-    justify-items: center;
-    aspect-ratio: auto;
+  .whx-make {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px 24px;
   }
 
-  .whx-streams {
+  .whx-pitcher {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+    width: min(100%, 240px);
+  }
+
+  .whx-fields {
+    justify-content: start;
+  }
+
+  .whx-field {
+    grid-template-columns: 4.5em 100px 2.6em;
+    gap: 10px;
+  }
+
+  .whx-field-range {
+    padding-left: calc(4.5em + 10px);
+  }
+
+  .whx-bean {
+    display: none;
+  }
+}
+
+/* 計算機: スマホは ボトル2本 → スライダー → 入力 → ピッチャー → 結果 の縦積み */
+@media (max-width: 767px) {
+  .whx-connector {
     display: none;
   }
 
-  /* 入力欄の絶対配置の基準を保つため static でなく relative に戻す */
-  .whx-bottle,
-  .whx-pitcher {
-    position: relative;
-    inset: auto;
-    width: min(100%, 480px);
-    transform: none;
+  .whx-mix {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 12px;
+  }
+
+  .whx-bottle {
+    width: min(100%, 212px);
+  }
+
+  .whx-bottle--b {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .whx-ratio {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 28px 0 0;
+  }
+
+  .whx-make {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 28px;
+    margin-top: 36px;
+  }
+
+  .whx-fields {
+    grid-row: 1;
+    justify-content: center;
   }
 
   .whx-pitcher {
-    width: min(100%, 280px);
+    grid-row: 2;
+    width: min(70%, 220px);
   }
 
   .whx-result {
-    position: static;
-    justify-items: center;
+    justify-self: center;
   }
 
-  .whx-result:empty {
-    display: none;
-  }
-
-  /* 縦積みでは注ぎの向きが無意味なので、ボトルAも向きを揃える(キャップ左) */
-  .whx-bottle--a svg {
-    transform: scaleX(-1);
-  }
-
-  .whx-bottle--a .whx-bottle-cal,
-  .whx-bottle--a .whx-bottle-mg {
-    left: 26%;
-  }
-
-  .whx-bottle--a .whx-bottle-cal-unit,
-  .whx-bottle--a .whx-bottle-mg-unit {
-    left: 64%;
-  }
-
-  .whx-bottle--a .whx-chip {
-    left: 26%;
+  .whx-result-value {
+    font-size: 38px;
   }
 }
 
