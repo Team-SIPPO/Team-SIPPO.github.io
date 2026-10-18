@@ -61,6 +61,7 @@ function Bottle({ variant, label, ca, mg, hardness, onChange }) {
               aria-required="true"
               aria-label={`水${prefix}のカルシウム(mg/L)`}
               className="whx-tag-input"
+              placeholder="必須"
               value={ca}
               onChange={(e) => onChange(`ca${prefix}`, e.target.value)}
             />
@@ -76,6 +77,7 @@ function Bottle({ variant, label, ca, mg, hardness, onChange }) {
               aria-required="true"
               aria-label={`水${prefix}のマグネシウム(mg/L)`}
               className="whx-tag-input"
+              placeholder="必須"
               value={mg}
               onChange={(e) => onChange(`mg${prefix}`, e.target.value)}
             />
@@ -213,6 +215,11 @@ export function WaterHardnessPage() {
     <main className="page-main page-main--whx">
       <PageIntro eyebrow="水の硬度にこだわるコーヒーマニアへ" title="ざっくり水硬度計算機" align="center" />
 
+      <p className="whx-guide">
+        <span className="whx-guide-chip" aria-hidden="true" />
+        黄色い欄は必須入力です。2本の水の成分表示（Ca・Mg）と、作る量を入れてください
+      </p>
+
       <div className="whx-stage" ref={stageRef}>
         {connector && sliderEnabled && (
           <svg
@@ -303,7 +310,7 @@ export function WaterHardnessPage() {
                 required
                 aria-required="true"
                 className="whx-field-input"
-                placeholder="例 500"
+                placeholder="必須"
                 value={inputs.total}
                 onChange={(e) => handleChange('total', e.target.value)}
               />
