@@ -93,13 +93,5 @@ export const activityPages = {
       ['ワクワク作って、ワイワイシェアできる', 'カフェのオープン準備中'],
       ['2027年オープン予定', '（それまでは不定期開催）'],
     ],
-    items: [
-      {
-        year: '2022',
-        title: 'ざっくり水硬度計算機',
-        image: 'activity-pot.png',
-        to: '/calc-waterhardness',
-      },
-    ],
   },
 };

@@ -1412,7 +1412,6 @@
   inset: 0;
   border: 2px dashed var(--color-ink);
   border-radius: 50%;
-  animation: hero-spot-march 9s linear infinite;
 }
 
 .activity-hero-spot:hover,
@@ -1446,12 +1445,6 @@
 .activity-hero-spot:hover .activity-hero-spot-label,
 .activity-hero-spot:focus-visible .activity-hero-spot-label {
   box-shadow: 5px 5px 0 var(--color-accent);
-}
-
-@keyframes hero-spot-march {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* スマホ: 画面いっぱいに広げ、絵は最低 720px 幅を保って横を切り抜く。

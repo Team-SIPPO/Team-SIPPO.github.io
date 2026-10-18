@@ -9,7 +9,7 @@ export function ActivityPage({ page }) {
     <main className="page-main">
       <PageIntro title={page.title} lead={leadLines} align="center" />
       {page.hero ? <ActivityHero hero={page.hero} /> : null}
-      <ActivityHistoryGrid title={page.title} items={page.items} />
+      {page.items?.length ? <ActivityHistoryGrid title={page.title} items={page.items} /> : null}
     </main>
   );
 }
