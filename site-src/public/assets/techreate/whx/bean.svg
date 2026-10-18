@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48" width="40" height="48">
-  <path id="bean-outline" d="M31.13 28.5 C27.4 37.71 19.4 43.17 13.26 40.69 C7.11 38.21 5.15 28.72 8.87 19.5 C12.6 10.29 20.6 4.83 26.74 7.31 C32.89 9.79 34.85 19.28 31.13 28.5 Z" fill="none" stroke="#070707" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path id="bean-center-line" d="M26.37 8.24 C17.43 14.33 22.57 33.67 13.63 39.76" fill="none" stroke="#070707" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="bean" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48">
+  <path id="outline" d="M31.13,28.5c-3.73,9.21-11.73,14.67-17.87,12.19-6.15-2.48-8.11-11.97-4.39-21.19,3.73-9.21,11.73-14.67,17.87-12.19,6.15,2.48,8.11,11.97,4.39,21.19Z" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  <path id="center-line" d="M26.37,8.24c-8.94,6.09-3.8,25.43-12.74,31.52" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
 </svg>

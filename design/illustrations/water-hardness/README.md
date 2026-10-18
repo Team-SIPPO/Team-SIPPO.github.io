@@ -15,6 +15,7 @@
 | --- | --- |
 | `build.mjs` | ジオメトリの定義。SVG と Illustrator 用スクリプトを書き出す |
 | `water-hardness-illustrations.jsx` | Illustrator 用スクリプト（自動生成） |
+| `water-hardness-illustrations.ai` | スクリプトで描いた Illustrator 原本。編集はこれを開けばよい |
 | `site-src/public/assets/techreate/whx/*.svg` | サイトで使う SVG（自動生成 or Illustrator から書き出し） |
 
 ## Illustrator で編集する
@@ -23,7 +24,7 @@
 2. アートボード `bottle`（212×280）、`pitcher`（260×186）、`bean`（40×48）に線パスで描かれる
 3. 線を調整する。**アートボードのサイズは変えない**（サイトの入力欄や線の位置がこのサイズ基準）
 4. 「書き出し > スクリーン用に書き出し」で形式 SVG を選び、`site-src/public/assets/techreate/whx/` に上書き
-   - SVG オプション: スタイル「プレゼンテーション属性」、線のアウトライン化はしない
+   - SVG オプション: スタイル「プレゼンテーション属性」、レスポンシブ ON、「アートボードカラーを含める」OFF、「サブフォルダーを作成」OFF
 
 ### 位置を合わせている箇所
 

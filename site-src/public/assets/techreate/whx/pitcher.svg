@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 186" width="260" height="186">
-  <path id="pitcher-water" d="M26 108 L16 150 C11.7 168 22 178 40 178 L200 178 C218 178 228.3 168 224 150 L214 108 Z" fill="#fff000" fill-opacity="0.55"/>
-  <path id="pitcher-water-surface" d="M214 108 C214 111.59 171.91 114.5 120 114.5 C68.09 114.5 26 111.59 26 108 C26 104.41 68.09 101.5 120 101.5 C171.91 101.5 214 104.41 214 108 Z" fill="#ffffff" fill-opacity="0.45"/>
-  <path id="pitcher-body" d="M20 6 C30 8 38 10 46 10 L196 10 C200.4 10 204 13.1 204 17 C204 20.9 200.4 24 196 24 L194 24 L224 150 C228.3 168 218 178 200 178 L40 178 C22 178 11.7 168 16 150 L46 24 C36 20 26 12 20 6 Z" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path id="pitcher-rim-line" d="M46 24 L194 24" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path id="pitcher-handle-outer" d="M196.9 36 L210 36 C240 36 252 42 252 62 L250 120 C249.4 136 240 143 222.6 144" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path id="pitcher-handle-inner" d="M200.2 50 L212 50 C232 50 238 56 238 66 L236.6 116 C236.3 126 230 131 219.5 131" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="pitcher" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 186">
+  <path id="water" d="M26,108l-10,42c-4.3,18,6,28,24,28h160c18,0,28.3-10,24-28l-10-42H26Z" fill="#fff000" opacity=".55"/>
+  <ellipse id="water-surface" cx="120" cy="108" rx="94" ry="6.5" fill="#fff" opacity=".45"/>
+  <path id="body" d="M20,6c10,2,18,4,26,4h150c4.4,0,8,3.1,8,7s-3.6,7-8,7h-2l30,126c4.3,18-6,28-24,28H40c-18,0-28.3-10-24-28L46,24c-10-4-20-12-26-18Z" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <line id="rim-line" x1="46" y1="24" x2="194" y2="24" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="handle-outer" d="M196.9,36h13.1c30,0,42,6,42,26l-2,58c-.6,16-10,23-27.4,24" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+  <path id="handle-inner" d="M200.2,50h11.8c20,0,26,6,26,16l-1.4,50c-.3,10-6.6,15-17.1,15" fill="none" stroke="#070707" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
 </svg>
