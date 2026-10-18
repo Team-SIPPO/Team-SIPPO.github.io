@@ -1,265 +1,375 @@
-import { useId, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { PageIntro } from '../components/molecules/PageIntro';
+import { asset } from '../lib/asset';
+
+/* 操作のしくみ
+   - 2本の水のCa・Mgと「作る量」は必須
+   - スライダーは「硬度の物差し」: 左端=水Aの硬度、右端=水Bの硬度。
+     つまみの位置がそのまま、できあがりの硬度になる(Aに寄せるほどAが多い)
+   - 目標硬度の欄はスライダーと同じ値の別表現。どちらを動かしても、もう一方が追従する
+   - 計算はリアルタイム(ボタンなし) */
+
+const SLIDER_STEPS = 1000;
 
 const emptyInputs = {
-  cal1: '',
-  mg1: '',
-  cal2: '',
-  mg2: '',
-  totalAmount: '',
-  totalHardness: '',
+  caA: '',
+  mgA: '',
+  caB: '',
+  mgB: '',
+  total: '',
 };
 
+// 硬度(mg/L) = Ca × 2.5 + Mg × 4.1
 function calcHardness(ca, mg) {
-  return Number(ca) * 2.5 + Number(mg) * 4.1;
+  return ca * 2.5 + mg * 4.1;
 }
 
-function formatHardness(value) {
-  return String(Math.round(value * 100) / 100);
+// 空欄・負の値・数値以外は null
+function parseAmount(value) {
+  if (value === '' || value === null) return null;
+  const n = Number(value);
+  return Number.isFinite(n) && n >= 0 ? n : null;
 }
 
-/* 横倒しのペットボトル(SVG製・画像不使用)。
-   線はink・水はグレー階調・キャップだけ黄色のアクセント(4色ルール)。
-   flip でキャップが右端になる(左に置いて中央へ注ぐボトル用) */
-function BottleArt({ flip = false }) {
-  const clipId = useId();
-  return (
-    <svg viewBox="0 0 420 120" aria-hidden="true" focusable="false">
-      <defs>
-        <clipPath id={clipId}>
-          <path d="M 32 50 L 50 44 Q 66 10 100 10 L 384 10 Q 410 10 410 35 L 410 85 Q 410 110 384 110 L 100 110 Q 66 110 50 76 L 32 70 Z" />
-        </clipPath>
-      </defs>
-      <g transform={flip ? 'scale(-1 1) translate(-420 0)' : undefined}>
-        {/* 水(グレー階調) */}
-        <rect x="30" y="58" width="382" height="54" fill="#e3e3e3" clipPath={`url(#${clipId})`} />
-        {/* ボトル本体 */}
-        <path
-          d="M 32 50 L 50 44 Q 66 10 100 10 L 384 10 Q 410 10 410 35 L 410 85 Q 410 110 384 110 L 100 110 Q 66 110 50 76 L 32 70 Z"
-          fill="none"
-          stroke="var(--color-ink)"
-          strokeWidth="2.4"
-          strokeLinejoin="round"
-        />
-        {/* ボトルのリブ */}
-        <path d="M 372 14 V 106 M 380 14 V 106" fill="none" stroke="#c7c7c7" strokeWidth="1.5" />
-        {/* キャップ(黄色のアクセント)。注いでいる想定なので開栓済みの体 */}
-        <rect x="8" y="46" width="24" height="28" rx="3" fill="var(--color-accent)" stroke="var(--color-ink)" strokeWidth="2.2" />
-        <path d="M 15 46 V 74 M 22 46 V 74" fill="none" stroke="var(--color-ink)" strokeWidth="1.2" />
-      </g>
-    </svg>
-  );
-}
+const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
-/* ピッチャー(SVG製・注ぎ口なしの丸角容器) */
-function PitcherArt() {
-  const clipId = useId();
-  return (
-    <svg viewBox="0 0 300 240" aria-hidden="true" focusable="false">
-      <defs>
-        <clipPath id={clipId}>
-          <path d="M 56 40 L 224 40 Q 240 40 240 56 L 240 204 Q 240 222 222 222 L 58 222 Q 40 222 40 204 L 40 56 Q 40 40 56 40 Z" />
-        </clipPath>
-      </defs>
-      <rect x="22" y="110" width="220" height="114" fill="#e3e3e3" clipPath={`url(#${clipId})`} />
-      <path
-        d="M 56 40 L 224 40 Q 240 40 240 56 L 240 204 Q 240 222 222 222 L 58 222 Q 40 222 40 204 L 40 56 Q 40 40 56 40 Z"
-        fill="none"
-        stroke="var(--color-ink)"
-        strokeWidth="2.4"
-        strokeLinejoin="round"
-      />
-      {/* 取っ手は二重線 */}
-      <path
-        d="M 240 72 Q 292 72 292 130 Q 292 188 240 188"
-        fill="none"
-        stroke="var(--color-ink)"
-        strokeWidth="2.4"
-      />
-      <path
-        d="M 240 84 Q 279 84 279 130 Q 279 176 240 176"
-        fill="none"
-        stroke="var(--color-ink)"
-        strokeWidth="2.4"
-      />
-    </svg>
-  );
-}
-
-/* クラス名はリテラルで持つ(テンプレート文字列で組むと Tailwind の
+/* イラストのSVGは design/illustrations/water-hardness/ で生成・Illustratorで編集する。
+   クラス名はリテラルで持つ(テンプレート文字列で組むと Tailwind の
    未使用クラス削除に引っかかり、ビルドCSSから消える) */
 const bottleClassNames = {
   a: 'whx-bottle whx-bottle--a',
   b: 'whx-bottle whx-bottle--b',
 };
 
-const resultClassNames = {
-  a: 'whx-result whx-result--a',
-  b: 'whx-result whx-result--b',
-};
-
-function Bottle({ variant, values, fields, onChange }) {
-  const [calField, mgField] = fields;
+function Bottle({ variant, label, ca, mg, hardness, onChange }) {
+  const prefix = variant === 'a' ? 'A' : 'B';
   return (
-    <div className={bottleClassNames[variant]}>
-      <BottleArt flip={variant === 'a'} />
-      {/* 「実物のボトルの成分表示を写せばいい」を一言で伝えるラベル */}
-      <span className="whx-chip">成分表示</span>
-      <input
-        type="number"
-        min="0"
-        step="0.01"
-        className="whx-input whx-bottle-cal"
-        placeholder="カルシウム 例:80"
-        value={values[calField]}
-        onChange={(e) => onChange(calField, e.target.value)}
-      />
-      <span className="whx-unit whx-bottle-cal-unit">mg/L</span>
-      <input
-        type="number"
-        min="0"
-        step="0.01"
-        className="whx-input whx-bottle-mg"
-        placeholder="マグネシウム 例:26"
-        value={values[mgField]}
-        onChange={(e) => onChange(mgField, e.target.value)}
-      />
-      <span className="whx-unit whx-bottle-mg-unit">mg/L</span>
-    </div>
-  );
-}
-
-function BottleResult({ variant, result }) {
-  return (
-    <div className={resultClassNames[variant]} aria-live="polite">
-      {result && (
-        <>
-          <span className="whx-result-hardness">硬度 {result.hardness} mg/L</span>
-          {result.amount !== null && (
-            <span className="whx-result-line">
-              <span className="whx-pill">{result.amount}</span>
-              {result.amount !== 'エラー' && <span className="whx-result-unit">ml</span>}
-            </span>
-          )}
-        </>
-      )}
-    </div>
+    <figure className={bottleClassNames[variant]}>
+      <div className="whx-bottle-art">
+        <img src={asset('whx/bottle.svg')} alt="" width="212" height="280" />
+        {/* 成分表示タグ(タグの絵と同じ角度で重ねる) */}
+        <fieldset className="whx-tag">
+          <legend className="whx-visually-hidden">水{prefix}の成分表示</legend>
+          <label className="whx-tag-row">
+            <span className="whx-tag-key">Ca</span>
+            <input
+              type="number"
+              inputMode="decimal"
+              min="0"
+              step="any"
+              required
+              aria-required="true"
+              aria-label={`水${prefix}のカルシウム(mg/L)`}
+              className="whx-tag-input"
+              value={ca}
+              onChange={(e) => onChange(`ca${prefix}`, e.target.value)}
+            />
+          </label>
+          <label className="whx-tag-row">
+            <span className="whx-tag-key">Mg</span>
+            <input
+              type="number"
+              inputMode="decimal"
+              min="0"
+              step="any"
+              required
+              aria-required="true"
+              aria-label={`水${prefix}のマグネシウム(mg/L)`}
+              className="whx-tag-input"
+              value={mg}
+              onChange={(e) => onChange(`mg${prefix}`, e.target.value)}
+            />
+          </label>
+          <span className="whx-tag-unit">mg/L</span>
+        </fieldset>
+      </div>
+      <figcaption className="whx-bottle-caption">
+        <span className="whx-bottle-name">{label}</span>
+        <span className="whx-bottle-hardness">
+          硬度 {hardness === null ? '—' : Math.round(hardness)}
+        </span>
+      </figcaption>
+    </figure>
   );
 }
 
 export function WaterHardnessPage() {
   const [inputs, setInputs] = useState(emptyInputs);
-  const [results, setResults] = useState(null);
+  // 水Bの割合(0〜1)。スライダー位置の正
+  const [ratioB, setRatioB] = useState(0.5);
+  // 目標硬度を手入力している間だけ文字列を持つ(null の間は計算値を表示)
+  const [targetDraft, setTargetDraft] = useState(null);
+
+  const caA = parseAmount(inputs.caA);
+  const mgA = parseAmount(inputs.mgA);
+  const caB = parseAmount(inputs.caB);
+  const mgB = parseAmount(inputs.mgB);
+  const total = parseAmount(inputs.total);
+
+  const hardA = caA !== null && mgA !== null ? calcHardness(caA, mgA) : null;
+  const hardB = caB !== null && mgB !== null ? calcHardness(caB, mgB) : null;
+  const ready = hardA !== null && hardB !== null;
+  const sameHardness = ready && Math.abs(hardA - hardB) < 1e-9;
+  const sliderEnabled = ready && !sameHardness;
+
+  const mixed = ready ? hardA + (hardB - hardA) * ratioB : null;
+  const percentA = Math.round((1 - ratioB) * 100);
+  const percentB = 100 - percentA;
+
+  const amountA = ready && total ? Math.round(total * (1 - ratioB)) : null;
+  const amountB = amountA !== null ? Math.round(total) - amountA : null;
+  // ml を丸めたあとの実際の硬度
+  const actual =
+    amountA !== null && total > 0 ? (hardA * amountA + hardB * amountB) / (amountA + amountB) : null;
+
+  const minHard = ready ? Math.min(hardA, hardB) : null;
+  const maxHard = ready ? Math.max(hardA, hardB) : null;
+
+  // 目標硬度の手入力が範囲外かどうか
+  const draftValue = targetDraft === null ? null : parseAmount(targetDraft);
+  const targetOutOfRange =
+    sliderEnabled && draftValue !== null && (draftValue < minHard - 0.5 || draftValue > maxHard + 0.5);
 
   function handleChange(field, value) {
     setInputs((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleCalc() {
-    const hard1 = calcHardness(inputs.cal1, inputs.mg1);
-    const hard2 = calcHardness(inputs.cal2, inputs.mg2);
-    const total = parseInt(inputs.totalAmount, 10);
-    const target = Number(inputs.totalHardness);
+  function handleSlider(e) {
+    setTargetDraft(null);
+    setRatioB(Number(e.target.value) / SLIDER_STEPS);
+  }
 
-    let amount1 = 'エラー';
-    let amount2 = null;
-    for (let x = 1; x < total; x++) {
-      const y = total - x;
-      const blended = Math.trunc((x / total) * hard1 + (y / total) * hard2);
-      if (target === blended) {
-        amount1 = String(x);
-        amount2 = String(y);
-        break;
-      }
+  function handleTargetChange(e) {
+    const text = e.target.value;
+    setTargetDraft(text);
+    const t = parseAmount(text);
+    if (!sliderEnabled || t === null) return;
+    if (t >= minHard - 0.5 && t <= maxHard + 0.5) {
+      setRatioB(clamp01((t - hardA) / (hardB - hardA)));
     }
-
-    setResults({
-      bottle1: { hardness: formatHardness(hard1), amount: amount1 },
-      bottle2: { hardness: formatHardness(hard2), amount: amount2 },
-    });
   }
 
-  function handleClear() {
-    setInputs(emptyInputs);
-    setResults(null);
+  // 入力を離れたら、範囲外の値は近いほうの端に寄せて表示を計算値に戻す
+  function handleTargetBlur() {
+    const t = parseAmount(targetDraft ?? '');
+    if (sliderEnabled && t !== null) {
+      setRatioB(clamp01((t - hardA) / (hardB - hardA)));
+    }
+    setTargetDraft(null);
   }
+
+  // 未入力の必須項目
+  const missing = [];
+  if (hardA === null) missing.push('水AのCa・Mg');
+  if (hardB === null) missing.push('水BのCa・Mg');
+  if (!total) missing.push('作る量');
+
+  let status = null;
+  if (missing.length > 0) {
+    status = `${missing.join('、')}を入れると計算します`;
+  } else if (sameHardness) {
+    status = '2本の硬度が同じなので、混ぜても硬度は変わりません';
+  } else if (targetOutOfRange) {
+    status = `この2本では ${Math.round(minHard)}〜${Math.round(maxHard)} mg/L の間で作れます`;
+  }
+
+  /* つまみ → ピッチャーの口 を結ぶ線。レイアウトが変わっても追従するよう実測する */
+  const stageRef = useRef(null);
+  const sliderRef = useRef(null);
+  const pitcherRef = useRef(null);
+  const [connector, setConnector] = useState(null);
+
+  const measure = useCallback(() => {
+    const stage = stageRef.current;
+    const slider = sliderRef.current;
+    const pitcher = pitcherRef.current;
+    if (!stage || !slider || !pitcher) return;
+    const s = stage.getBoundingClientRect();
+    const r = slider.getBoundingClientRect();
+    const p = pitcher.getBoundingClientRect();
+    const thumb = 34; // つまみの直径(CSSの --whx-thumb と同じ)
+    const x1 = r.left - s.left + thumb / 2 + (r.width - thumb) * ratioB;
+    const y1 = r.top - s.top + r.height / 2 + thumb / 2;
+    // 口の中心: pitcher.svg(260x186)の x=120, y=10
+    const x2 = p.left - s.left + p.width * (120 / 260);
+    const y2 = p.top - s.top + p.height * (10 / 186);
+    setConnector({ x1, y1, x2, y2, w: s.width, h: s.height });
+  }, [ratioB]);
+
+  useLayoutEffect(() => {
+    measure();
+  }, [measure]);
+
+  useEffect(() => {
+    const ro = new ResizeObserver(() => measure());
+    if (stageRef.current) ro.observe(stageRef.current);
+    return () => ro.disconnect();
+  }, [measure]);
+
+  const targetDisplay =
+    targetDraft !== null ? targetDraft : mixed === null ? '' : String(Math.round(mixed));
 
   return (
-    <main className="page-main">
-      <PageIntro
-        eyebrow="水の硬度にこだわるコーヒーマニアへ"
-        title="ざっくり水硬度計算機"
-        align="center"
-      />
+    <main className="page-main page-main--whx">
+      <PageIntro eyebrow="水の硬度にこだわるコーヒーマニアへ" title="ざっくり水硬度計算機" align="center" />
 
-      {/* 使い方は文章でなく3ステップで */}
-      <ol className="whx-steps">
-        <li>2本のボトルの成分表示を写す</li>
-        <li>作りたい量と硬度を入れる</li>
-        <li>計算!</li>
-      </ol>
+      <div className="whx-stage" ref={stageRef}>
+        {connector && sliderEnabled && (
+          <svg
+            className="whx-connector"
+            viewBox={`0 0 ${connector.w} ${connector.h}`}
+            aria-hidden="true"
+            focusable="false"
+          >
+            <line
+              x1={connector.x1}
+              y1={connector.y1}
+              x2={connector.x2}
+              y2={connector.y2}
+              stroke="var(--color-ink)"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+          </svg>
+        )}
 
-      {/* 2本のボトルがピッチャーへ注いでいる構図 */}
-      <div className="whx-stage">
-        <svg className="whx-streams" viewBox="0 0 820 640" aria-hidden="true" focusable="false">
-          {/* ボトルの口から出て、すぐ重力で垂直に落ち、水面の色に溶けて消える */}
-          <path
-            d="M 351 96 C 374 118 384 180 385 260 C 386 360 381 460 378 528"
-            fill="none"
-            stroke="#e3e3e3"
-            strokeWidth="12"
-            strokeLinecap="round"
+        {/* 1段目: 水A ─ 混ぜる割合 ─ 水B */}
+        <div className="whx-mix">
+          <Bottle
+            variant="a"
+            label="水 A"
+            ca={inputs.caA}
+            mg={inputs.mgA}
+            hardness={hardA}
+            onChange={handleChange}
           />
-          <path
-            d="M 469 294 C 448 300 434 330 429 390 C 426 440 428 490 431 528"
-            fill="none"
-            stroke="#e3e3e3"
-            strokeWidth="12"
-            strokeLinecap="round"
-          />
-          {/* 着水の粒 */}
-          <circle cx="366" cy="512" r="3.5" fill="#e3e3e3" />
-          <circle cx="392" cy="506" r="2.8" fill="#e3e3e3" />
-          <circle cx="443" cy="510" r="3.2" fill="#e3e3e3" />
-        </svg>
 
-        <Bottle variant="a" values={inputs} fields={['cal1', 'mg1']} onChange={handleChange} />
-        <BottleResult variant="a" result={results?.bottle1} />
+          <div className="whx-ratio">
+            <label className="whx-ratio-title" htmlFor="whx-ratio">
+              混ぜる割合
+            </label>
+            <p className="whx-ratio-hint">
+              {sliderEnabled ? 'つまみを寄せたほうの水が多くなります' : 'タグにCa・Mgを入れると動かせます'}
+            </p>
+            <div className="whx-track">
+              <input
+                id="whx-ratio"
+                ref={sliderRef}
+                type="range"
+                min="0"
+                max={SLIDER_STEPS}
+                step="1"
+                value={Math.round(ratioB * SLIDER_STEPS)}
+                onChange={handleSlider}
+                disabled={!sliderEnabled}
+                className="whx-slider"
+                aria-valuetext={
+                  sliderEnabled
+                    ? `水A ${percentA}%、水B ${percentB}%、硬度 ${Math.round(mixed)} mg/L`
+                    : 'Ca・Mgを入れると動かせます'
+                }
+              />
+            </div>
+            <div className="whx-ratio-labels" aria-hidden="true">
+              <span>
+                A <b>{sliderEnabled ? percentA : '—'}</b>%
+              </span>
+              <span>
+                B <b>{sliderEnabled ? percentB : '—'}</b>%
+              </span>
+            </div>
+          </div>
 
-        <Bottle variant="b" values={inputs} fields={['cal2', 'mg2']} onChange={handleChange} />
-        <BottleResult variant="b" result={results?.bottle2} />
-
-        <div className="whx-pitcher">
-          <PitcherArt />
-          <span className="whx-chip">作りたい水</span>
-          <input
-            type="number"
-            min="0"
-            className="whx-input whx-pitcher-amount"
-            placeholder="量 例:500"
-            value={inputs.totalAmount}
-            onChange={(e) => handleChange('totalAmount', e.target.value)}
+          <Bottle
+            variant="b"
+            label="水 B"
+            ca={inputs.caB}
+            mg={inputs.mgB}
+            hardness={hardB}
+            onChange={handleChange}
           />
-          <span className="whx-unit whx-pitcher-amount-unit">ml</span>
-          <input
-            type="number"
-            min="0"
-            className="whx-input whx-pitcher-hardness"
-            placeholder="硬度 例:100"
-            value={inputs.totalHardness}
-            onChange={(e) => handleChange('totalHardness', e.target.value)}
-          />
-          <span className="whx-unit whx-pitcher-hardness-unit">mg/L</span>
         </div>
-      </div>
 
-      <div className="whx-buttons">
-        <button type="button" className="cta-button" onClick={handleCalc}>
-          計算
-        </button>
-        <button type="button" className="whx-clear" onClick={handleClear}>
-          クリア
-        </button>
+        {/* 2段目: 入力 ─ ピッチャー ─ 結果 */}
+        <div className="whx-make">
+          <div className="whx-fields">
+            <label className="whx-field">
+              <span className="whx-field-label">作る量</span>
+              <input
+                type="number"
+                inputMode="numeric"
+                min="1"
+                step="1"
+                required
+                aria-required="true"
+                className="whx-field-input"
+                placeholder="例 500"
+                value={inputs.total}
+                onChange={(e) => handleChange('total', e.target.value)}
+              />
+              <span className="whx-field-unit">ml</span>
+            </label>
+            <label className="whx-field">
+              <span className="whx-field-label">目標硬度</span>
+              <input
+                type="number"
+                inputMode="numeric"
+                min="0"
+                step="1"
+                className="whx-field-input"
+                placeholder="—"
+                value={targetDisplay}
+                disabled={!sliderEnabled}
+                aria-invalid={targetOutOfRange || undefined}
+                onChange={handleTargetChange}
+                onBlur={handleTargetBlur}
+              />
+              <span className="whx-field-unit">mg/L</span>
+            </label>
+            {sliderEnabled && (
+              <p className="whx-field-range">
+                {Math.round(minHard)}〜{Math.round(maxHard)} mg/L で作れます
+              </p>
+            )}
+          </div>
+
+          <img
+            ref={pitcherRef}
+            className="whx-pitcher"
+            src={asset('whx/pitcher.svg')}
+            alt=""
+            width="260"
+            height="186"
+            onLoad={measure}
+          />
+
+          <div className="whx-result">
+            <dl className="whx-result-list" aria-live="polite">
+              <div className="whx-result-row">
+                <dt>Aの水</dt>
+                <dd>
+                  <span className="whx-result-value">{amountA ?? '—'}</span>
+                  <span className="whx-result-unit">ml</span>
+                </dd>
+              </div>
+              <div className="whx-result-row">
+                <dt>Bの水</dt>
+                <dd>
+                  <span className="whx-result-value">{amountB ?? '—'}</span>
+                  <span className="whx-result-unit">ml</span>
+                </dd>
+              </div>
+            </dl>
+            <img className="whx-bean" src={asset('whx/bean.svg')} alt="" width="40" height="48" />
+            {actual !== null && (
+              <p className="whx-result-actual">できあがり 約 {Math.round(actual)} mg/L</p>
+            )}
+          </div>
+        </div>
+
+        <p className="whx-status" role="status">
+          {status}
+        </p>
       </div>
 
       <p className="whx-note">

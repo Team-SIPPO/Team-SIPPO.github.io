@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 280" width="212" height="280">
+  <path id="bottle-body" d="M43 33 L43 44 C43 70 12 78 12 112 L12 258 C12 270 20 276 32 276 L88 276 C100 276 108 270 108 258 L108 112 C108 78 77 70 77 44 L77 33" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-cap" d="M40 26 L40 9 C40 6.2 42.2 4 45 4 L75 4 C77.8 4 80 6.2 80 9 L80 26" fill="none" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-cap-line" d="M40 12 L80 12" fill="none" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-ring" d="M38 26 L82 26 C83.1 26 84 26.9 84 28 L84 31 C84 32.1 83.1 33 82 33 L38 33 C36.9 33 36 32.1 36 31 L36 28 C36 26.9 36.9 26 38 26 Z" fill="#fff000" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-string-loop" d="M43 37.5 C47 41.5 73 41.5 77 37.5" fill="none" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-tag" d="M99.89 102.09 L195.36 112.13 C199.74 112.59 202.94 116.54 202.48 120.92 L192.03 220.37 C191.57 224.75 187.62 227.95 183.24 227.49 L75.83 216.2 C71.45 215.74 68.25 211.78 68.71 207.41 L77.91 119.89 Z" fill="#ffffff" stroke="#070707" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-tag-rule" d="M93.1 185.84 L174.65 194.41" fill="none" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-grommet" d="M106.08 124.18 C106.08 127.77 103.17 130.68 99.58 130.68 C95.99 130.68 93.08 127.77 93.08 124.18 C93.08 120.59 95.99 117.68 99.58 117.68 C103.17 117.68 106.08 120.59 106.08 124.18 Z" fill="#fff000" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-grommet-hole" d="M102.38 124.18 C102.38 125.73 101.13 126.98 99.58 126.98 C98.03 126.98 96.78 125.73 96.78 124.18 C96.78 122.63 98.03 121.38 99.58 121.38 C101.13 121.38 102.38 122.63 102.38 124.18 Z" fill="#ffffff" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="bottle-string" d="M77 39 C90 46 101 84 99.58 124.18" fill="none" stroke="#070707" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
