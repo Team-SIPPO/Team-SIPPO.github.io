@@ -3,3 +3,4 @@ node_modules/
 .codex
 dist/
 npm-debug.log*
+.design
