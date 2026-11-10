@@ -2,6 +2,7 @@ import { IconImage } from '../atoms/IconImage';
 
 export function PageIntro({ eyebrow, title, lead, image, align = 'image' }) {
   const isCenter = align === 'center';
+
   const className = isCenter ? 'page-intro page-intro--center' : 'page-intro';
 
   return (

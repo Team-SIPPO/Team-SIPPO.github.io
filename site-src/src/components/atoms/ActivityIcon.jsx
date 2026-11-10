@@ -14,6 +14,7 @@ function BulbIcon() {
 
 function WrenchIcon() {
   const clipId = useId();
+
   return (
     <>
       <defs>

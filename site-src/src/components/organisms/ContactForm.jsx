@@ -5,6 +5,7 @@ const initialValues = { name: '', email: '', subject: '', message: '' };
 
 export function ContactForm() {
   const [values, setValues] = useState(initialValues);
+
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
   const handleChange = (event) => {

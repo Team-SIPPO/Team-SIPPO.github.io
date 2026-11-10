@@ -26,5 +26,6 @@ const placements = [
 
 export const homeActivities = placements.map(({ slug, ...placement }) => {
   const activity = activitiesBySlug[slug];
+
   return { label: activity.title, to: activity.to, ...placement };
 });

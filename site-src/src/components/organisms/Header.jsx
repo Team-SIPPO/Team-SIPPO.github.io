@@ -6,6 +6,7 @@ import { NavItem } from '../molecules/NavItem';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
   const closeMenu = () => setIsOpen(false);
 
   return (

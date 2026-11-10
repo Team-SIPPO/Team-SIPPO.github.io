@@ -6,5 +6,5 @@
 //   メールソフトが開き、入力内容が本文に転記される。
 export const contactFormConfig = {
   endpoint: '',
-  email: 'a.nap.of.kinosuke@gmail.com',
+  email: 'team.sippo@gmail.com',
 };
