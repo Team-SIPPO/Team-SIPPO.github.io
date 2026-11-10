@@ -9,6 +9,7 @@ import { asset } from '../../lib/asset';
      focusX(0〜1)の位置が画面中央に来るようにする(index.css .activity-hero-*) */
 export function ActivityHero({ hero }) {
   const { image, alt, width, height, focusX = 0.5, spots = [] } = hero;
+
   const pct = (value, total) => `${(value / total) * 100}%`;
 
   return (

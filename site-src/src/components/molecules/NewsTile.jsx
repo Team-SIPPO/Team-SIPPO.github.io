@@ -6,6 +6,7 @@ const NEW_BADGE_DAYS = 60;
 function isRecent(dateText) {
   // date は "YY/M/D" 形式
   const [year, month, day] = (dateText ?? '').split('/').map(Number);
+
   if (!year || !month || !day) return false;
   const published = new Date(2000 + year, month - 1, day);
   const ageDays = (Date.now() - published.getTime()) / (1000 * 60 * 60 * 24);

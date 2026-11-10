@@ -6,6 +6,7 @@ import { NotFoundPage } from './NotFoundPage';
 
 export function MemberDetailPage() {
   const { memberSlug = '' } = useParams();
+
   const member = membersBySlug[memberSlug];
 
   if (!member) {

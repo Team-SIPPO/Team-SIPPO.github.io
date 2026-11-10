@@ -419,7 +419,7 @@
 
   .page-lead {
     display: grid;
-    gap: 8px;
+    gap: 10px;
     margin-top: 28px;
     font-size: var(--fs-body-lg);
     line-height: var(--lh-reading-relaxed);
